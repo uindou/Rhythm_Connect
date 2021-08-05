@@ -19,9 +19,9 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Hierarchy
   m_RootView: {fileID: 3}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 642}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 474
     width: 470
     height: 197
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -72,7 +72,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 642}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -122,10 +122,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 708, y: 571}
-  m_MaxSize: {x: 18003, y: 18021}
+  m_MinSize: {x: 708, y: 592}
+  m_MaxSize: {x: 18003, y: 18042}
   vertical: 0
-  controlID: 43
+  controlID: 118
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -196,10 +196,10 @@ MonoBehaviour:
     y: 0
     width: 470
     height: 947
-  m_MinSize: {x: 232, y: 571}
-  m_MaxSize: {x: 10002, y: 18021}
+  m_MinSize: {x: 232, y: 592}
+  m_MaxSize: {x: 10002, y: 18042}
   vertical: 1
-  controlID: 53
+  controlID: 124
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -379,22 +379,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\my_ne\Documents\Rhythm_Connect\RhythmConnect
+  m_LastProjectPath: D:\GitHub\Rhythm_Connect\RhythmConnect
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 1e580000
-    m_LastClickedID: 22558
-    m_ExpandedIDs: 000000001658000000ca9a3b
+    m_SelectedIDs: 1e590000
+    m_LastClickedID: 22814
+    m_ExpandedIDs: 000000001e59000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -422,7 +422,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000016580000
+    m_ExpandedIDs: 000000001e590000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -603,9 +603,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 321.54404, y: 257.78632, z: -52.841732}
+    m_Target: {x: 436.47498, y: 347.22604, z: -108.73547}
     speed: 2
-    m_Value: {x: 345.23166, y: 267.58704, z: -50.067417}
+    m_Value: {x: 436.47498, y: 347.22604, z: -108.73547}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -656,9 +656,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 644.25604
+    m_Target: 519.8368
     speed: 2
-    m_Value: 616.51294
+    m_Value: 519.8368
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -713,7 +713,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 4014ffff2619ffffaa19ffff001affff301affffae1cffffdc1cffff5a1efffffa21ffff2a22ffff90ebffffdcebffffa0f1ffffd8f8ffff0af9ffff36f9ffff62f9ffff8ef9ffffe4f9ffffc4830000
+      m_ExpandedIDs: bad2ffff1edffffffef8ffff50f9ffff0afbffff6273000058760000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -729,7 +729,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 10}
+        m_ClientGUIView: {fileID: 0}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
