@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 44484463}
   - component: {fileID: 44484466}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: ButtonExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +465,7 @@ GameObject:
   - component: {fileID: 885306648}
   - component: {fileID: 885306647}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: ButtonConfig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 1362176759}
   - component: {fileID: 1362176762}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonPlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -973,7 +973,7 @@ GameObject:
   - component: {fileID: 1910322770}
   - component: {fileID: 1910322772}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: RhythConne Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
