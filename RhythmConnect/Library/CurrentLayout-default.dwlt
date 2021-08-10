@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 678, y: 492}
   m_MaxSize: {x: 14001, y: 14042}
   vertical: 0
-  controlID: 86
+  controlID: 97
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -150,7 +150,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 59
+  controlID: 98
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 60
+  controlID: 99
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -314,22 +314,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/Config
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/Config
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\my_ne\Documents\Rhythm_Connect\RhythmConnect
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d4580000
-    m_LastClickedID: 22740
-    m_ExpandedIDs: 00000000cc58000000ca9a3b
+    m_SelectedIDs: 46a80000
+    m_LastClickedID: 43078
+    m_ExpandedIDs: 000000006e5900007859000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -357,7 +357,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000cc580000
+    m_ExpandedIDs: 000000006e590000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -384,8 +384,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c623000000000000
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c623000000000000b66a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -479,9 +479,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: faf0ffff
-      m_LastClickedID: -3846
-      m_ExpandedIDs: 42fbffff465800004a580000
+      m_SelectedIDs: 08a80000
+      m_LastClickedID: 43016
+      m_ExpandedIDs: 9abdffffe8bdffff66beffffcec1ffffc6c5fffff6c5ffff3cc6ffff74c6ffffa6c6ffffd6c6ffffe8cdfffff4d0ffff2ad1ffffd4d3ffff04d4ffff42d4ffff78d4ffff96d8ffffe0d8ffff10d9ffff40d9ffff70d9fffffedcffff58ddffff88ddffffbaddffff0ae2ffff58e2ffff8ae2ffffbee2ffff2ee3ffff80e4ffff82e4ffff88e4ffff8ae4ffffd6e4ffff26e5ffff32e6ffff42fbffff34580000c6580000ee810000468400004e840000528400005c8400008c8700009c870000a8870000f48b00001c8c0000388c0000cc8e0000fe8e00005e8f0000989100001a920000ca950000f2950000d2a70000dca700001ca8000028a8000038a8000040a80000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -541,9 +541,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 564.61975, y: 272.51633, z: -107.35373}
+    m_Target: {x: 573.4271, y: 301.63028, z: -33.916603}
     speed: 2
-    m_Value: {x: 566.3804, y: 271.15814, z: -106.21083}
+    m_Value: {x: 573.4271, y: 301.63028, z: -33.916603}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -594,9 +594,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 303.18524
+    m_Target: 270.01547
     speed: 2
-    m_Value: 317.47147
+    m_Value: 270.01547
   m_Ortho:
     m_Target: 1
     speed: 2
