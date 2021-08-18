@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class GeneralFileReader : MonoBehaviour
 {
-    public string[] Line { get; private set; } = new string[8192];
+    public string[] Line { get; private set; }
     public int LineNum { get; private set; }
-    
     public bool LoadFile(string filename)
     {
         try
         {
+            Line = new string[8192];
+
             using (StreamReader sr = new StreamReader(filename))
             {
                 for (int i = 0; i < 8192; i++)
@@ -31,8 +32,20 @@ public class GeneralFileReader : MonoBehaviour
         }
         catch (FileNotFoundException e)
         {
+            Debug.Log("file load failed.");
             Debug.Log(e.Message);
-            throw;
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool ClearData()
+    {
+        for (int i = 0; i < 8192; i++)
+        {
+            Line[i] = null;
         }
 
         return true;
