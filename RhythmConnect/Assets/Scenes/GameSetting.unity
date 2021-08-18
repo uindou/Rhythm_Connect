@@ -859,10 +859,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 551558335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61a54a66230fb8d4a9d991a417a2839e, type: 3}
+  m_Script: {fileID: 11500000, guid: c24f850bd386c5b4db31ac4199df5c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: FreePlay
 --- !u!114 &551558338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -908,8 +907,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 551558337}
-        m_TargetAssemblyTypeName: OmankoManager, Assembly-CSharp
-        m_MethodName: OnClick
+        m_TargetAssemblyTypeName: SceneMovingSelecter, Assembly-CSharp
+        m_MethodName: SceneMoving
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
