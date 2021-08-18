@@ -13,9 +13,9 @@ public class SystemConfigManager : GeneralFileReader
     {
         LoadFile(filename);
 
-        for (int i = 0; i < LineNum; i++)
+        foreach(string line in Line)
         {
-            string[] temp = Line[i].Split(' ');
+            string[] temp = line.Split(' ');
 
             switch (temp[0])
             {
