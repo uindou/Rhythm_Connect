@@ -13,7 +13,7 @@ public class SystemConfigManager : GeneralFileReader
     {
         LoadFile(filename);
 
-        foreach(string line in Line)
+        foreach (string line in Line)
         {
             string[] temp = line.Split(' ');
 
@@ -49,6 +49,6 @@ public class SystemConfigManager : GeneralFileReader
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

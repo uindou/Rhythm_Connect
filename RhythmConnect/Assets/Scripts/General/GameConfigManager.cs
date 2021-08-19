@@ -15,7 +15,7 @@ class GameConfigManager : GeneralFileReader
     {
         LoadFile(filename);
 
-        foreach(string line in Line)
+        foreach (string line in Line)
         {
             string[] temp = line.Split(' ');
 

@@ -108,8 +108,8 @@
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
--r:"D:/GitHub/Rhythm_Connect/RhythmConnect/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll"
--r:"D:/GitHub/Rhythm_Connect/RhythmConnect/Library/PackageCache/com.unity.visualscripting@1.6.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
+-r:"D:/GitHub/RhythmConnect/Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll"
+-r:"D:/GitHub/RhythmConnect/Library/PackageCache/com.unity.visualscripting@1.6.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"D:/Unity/2021.1.16f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
 -r:"D:/Unity/2021.1.16f1/Editor/Data/Managed/UnityEngine/UnityEditor.DeviceSimulatorModule.dll"
 -r:"D:/Unity/2021.1.16f1/Editor/Data/Managed/UnityEngine/UnityEditor.dll"
@@ -341,16 +341,19 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/VSSettingsProvider.ref.dll"
+"Assets/GameManager.cs"
 "Assets/Scripts/Config/AspectRatioManager.cs"
-"Assets/Scripts/GameConfigManager.cs"
-"Assets/Scripts/GameManager.cs"
-"Assets/Scripts/GeneralFileReader.cs"
-"Assets/Scripts/GeneralFolderReader.cs"
+"Assets/Scripts/FreePlay/GameSettingMoving.cs"
+"Assets/Scripts/General/GameConfigManager.cs"
+"Assets/Scripts/General/GeneralFileReader.cs"
+"Assets/Scripts/General/GeneralFolderManager.cs"
+"Assets/Scripts/General/OmankoManager.cs"
+"Assets/Scripts/General/SystemConfigManager.cs"
 "Assets/Scripts/ModeSelect/buttonBack.cs"
-"Assets/Scripts/SystemConfigManager.cs"
+"Assets/Scripts/SongSelect/SongShuflle.cs"
 "Assets/Scripts/Title/buttonPlay.cs"
 "Assets/Scripts/Title/ColorChanger.cs"
-"Assets/Scripts/Title/OmankoManager.cs"
+"Assets/Scripts/Title/SceneMovingSelecter.cs"
 "Assets/Scripts/Title/SwitchActivePanel.cs"
 -langversion:8.0
 

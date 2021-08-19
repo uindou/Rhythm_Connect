@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class GeneralFolderReader : MonoBehaviour
 {
     public List<string> Folders { get; private set; } = new List<string>();
-    
+
     public bool LoadFolder(string foldername)
     {
         try
         {
             string[] temp = Directory.GetDirectories(foldername);
-            foreach(string fn in temp)
+            foreach (string fn in temp)
             {
                 Folders.Add(fn);
             }
@@ -32,9 +32,10 @@ public class GeneralFolderReader : MonoBehaviour
     public void Start()
     {
         LoadFolder("songdata");
-        foreach(string s in Folders)
+        foreach (string s in Folders)
         {
             Debug.Log(s);
         }
     }
 }
+
