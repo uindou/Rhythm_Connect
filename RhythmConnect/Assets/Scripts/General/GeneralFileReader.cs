@@ -6,27 +6,16 @@ using UnityEngine.UI;
 
 public class GeneralFileReader : MonoBehaviour
 {
-    public string[] Line { get; private set; }
-    public int LineNum { get; private set; }
+    public List<string> Line { get; private set; } = new List<string>();
     public bool LoadFile(string filename)
     {
         try
         {
-            Line = new string[8192];
-
             using (StreamReader sr = new StreamReader(filename))
             {
-                for (int i = 0; i < 8192; i++)
+                while(sr.EndOfStream == false)
                 {
-                    if (sr.EndOfStream == false)
-                    {
-                        Line[i] = sr.ReadLine();
-                        LineNum++;
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    Line.Add(sr.ReadLine());
                 }
             }
         }
@@ -36,16 +25,6 @@ public class GeneralFileReader : MonoBehaviour
             Debug.Log(e.Message);
 
             return false;
-        }
-
-        return true;
-    }
-
-    public bool ClearData()
-    {
-        for (int i = 0; i < 8192; i++)
-        {
-            Line[i] = null;
         }
 
         return true;
