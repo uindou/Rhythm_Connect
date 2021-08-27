@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GeneralFileReader : MonoBehaviour
+public class GeneralFileReader
 {
     public List<string> Line { get; private set; } = new List<string>();
     public bool LoadFile(string filename)

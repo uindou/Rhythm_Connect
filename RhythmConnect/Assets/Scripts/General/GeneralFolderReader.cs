@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GeneralFolderReader : MonoBehaviour
+public class GeneralFolderReader
 {
     public List<string> Folders { get; private set; } = new List<string>();
 
@@ -27,15 +27,6 @@ public class GeneralFolderReader : MonoBehaviour
         }
 
         return true;
-    }
-
-    public void Start()
-    {
-        LoadFolder("songdata");
-        foreach (string s in Folders)
-        {
-            Debug.Log(s);
-        }
     }
 }
 
