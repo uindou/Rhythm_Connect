@@ -9,7 +9,7 @@ public class SystemConfigManager : GeneralFileReader
     public char[] KeyConfig { get; private set; } = new char[4];
     public string SongDataFolderPath { get; private set; }
 
-    public bool AnalyseConfigString(string filename)
+    public bool LoadSystemConfig(string filename)
     {
         LoadFile(filename);
 
@@ -37,18 +37,5 @@ public class SystemConfigManager : GeneralFileReader
         }
 
         return true;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        AnalyseConfigString("systemconfig.rccfg");
-        Debug.Log(SongDataFolderPath);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -11,7 +11,7 @@ class GameConfigManager : GeneralFileReader
     public bool MirrorFlag { get; private set; }
     public string GaugeMode { get; private set; }
 
-    public bool AnalyseConfigString(string filename)
+    public bool LoadGameConfig(string filename)
     {
         LoadFile(filename);
 
@@ -47,15 +47,5 @@ class GameConfigManager : GeneralFileReader
         }
 
         return true;
-    }
-
-    public void Start()
-    {
-        AnalyseConfigString("gameconfig.rccfg");
-        Debug.Log(CalculatedHS);
-        Debug.Log(HSMultiplier);
-        Debug.Log(RandomFlag);
-        Debug.Log(MirrorFlag);
-        Debug.Log(GaugeMode);
     }
 }
