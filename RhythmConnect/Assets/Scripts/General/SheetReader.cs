@@ -29,7 +29,7 @@ public class SheetReader : GeneralFileReader
                 default:
                     if(temp[0][0]=='#')
                     {
-                        
+                        break;
                     }
                     break;
             }
