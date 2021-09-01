@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class SongInfo : GeneralFileReader
 {
-    public string SongName { get; private set; }
-    public string Genre { get; private set; }
-    public int HiScore { get; private set; }
-    public int NotesNum { get; private set; }
-    public int MaxCombo { get; private set; }
-
+    public string SongName { get; private set; }    //楽曲名
+    public string Genre { get; private set; }       //ジャンル名
+    public int NotesNum { get; private set; }       //この譜面に含まれるノートの合計数
+    public int HiScore { get; private set; }        //この譜面のハイスコア
+    public int MaxCombo { get; private set; }       //この譜面で過去に出したことのある最大コンボ数
+    
+    //曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
     public bool LoadSongInfo(string songname)
     {
         SongName = songname;
 
-        if(LoadFile(@"songinfo\" + songname + @"\" + songname + ".rcdat") == false)
+        if(LoadFile(myConstants.SongInfoFolderPath + @"\" + songname + ".rcdat") == false)
         {
             CreateSongInfoFile(songname);
         }
@@ -49,6 +50,8 @@ public class SongInfo : GeneralFileReader
         return true;
     }
 
+    //曲情報ファイルを新規に作成する 曲情報ファイルが読み込めなかった際に呼び出される
+    //成否をBool値で返す（成功でTrue）
     private bool CreateSongInfoFile(string songname)
     {
         return true;

@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gcm.LoadGameConfig("gameconfig.rccfg");
-        scm.LoadSystemConfig("systemconfig.rccfg");
+        gcm.LoadGameConfig(myConstants.GameConfigFilePath);
+        scm.LoadSystemConfig(myConstants.SystemConfigFilePath);
 
         Debug.Log(gcm.GaugeMode);
         Debug.Log(scm.SongDataFolderPath);

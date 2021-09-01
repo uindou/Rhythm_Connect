@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SheetReader : GeneralFileReader
+public class SheetData : GeneralFileReader
 {
-    public int NotesNum { get; private set; }
-    public string Genre { get; private set; }
+    public int NotesNum { get; private set; }   //譜面に含まれるノーツ数
+    public string Genre { get; private set; }   //譜面に含まれる楽曲のジャンル
+    public string Artist { get; private set; }
+    public string Arranger { get; private set; }
+    public double Bpm { get; private set; }
+    public int PlayLevel { get; private set; }
+    public double Total { get; private set; }
 
     public SheetReader()
     {
@@ -24,6 +29,9 @@ public class SheetReader : GeneralFileReader
             {
                 case "#GENRE":
                     Genre = temp[1];
+                    break;
+                
+                case "#ARTIST":
                     break;
 
                 default:

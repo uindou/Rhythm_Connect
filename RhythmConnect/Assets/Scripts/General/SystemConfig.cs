@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SystemConfigManager : GeneralFileReader
+public class SystemConfig : GeneralFileReader
 {
     public char[] KeyConfig { get; private set; } = new char[4];
     public string SongDataFolderPath { get; private set; }

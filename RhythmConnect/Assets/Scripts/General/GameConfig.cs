@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-class GameConfigManager : GeneralFileReader
+//ゲームプレイに関わるレベルの設定を保持するクラス
+
+class GameConfig : GeneralFileReader
 {
-    public double CalculatedHS { get; private set; }
-    public double HSMultiplier { get; private set; }
-    public bool RandomFlag { get; private set; }
-    public bool MirrorFlag { get; private set; }
-    public string GaugeMode { get; private set; }
+    public double CalculatedHS { get; private set; }    //BPM*ハイスピードを計算した後の数値 固定HS用
+    public double HSMultiplier { get; private set; }    //HS倍率 固定HSを使わない奇特な方向け
+    public bool RandomFlag { get; private set; }        //ランダムオプションの有効状態
+    public bool MirrorFlag { get; private set; }        //ミラーオプションの有効状態
+    public int GaugeMode { get; private set; }       //ゲージの難易度状態 数値に対応するゲージ状態はmyConstantsクラスを参照の事
 
     public bool LoadGameConfig(string filename)
     {
@@ -38,7 +40,7 @@ class GameConfigManager : GeneralFileReader
                     break;
 
                 case "#GAUGEMODE":
-                    GaugeMode = temp[1];
+                    GaugeMode = int.Parse(temp[1]);
                     break;
 
                 default:
