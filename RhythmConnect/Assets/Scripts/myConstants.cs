@@ -1,3 +1,4 @@
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,7 +50,7 @@ static class myConstants
 
         try
         {
-            string[] temp = Directory.GetDirectories(foldername);
+            string[] temp = Directory.GetDirectories(folderpath);
             foreach (string fn in temp)
             {
                 Folders.Add(fn);

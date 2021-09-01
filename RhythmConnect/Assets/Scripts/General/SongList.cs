@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SongList : GeneralFolderReader
+public class SongList
 {
-    List<SongInfo> SongList = new List<SongInfo>();
+    List<SongInfo> Songs = new List<SongInfo>();
 }

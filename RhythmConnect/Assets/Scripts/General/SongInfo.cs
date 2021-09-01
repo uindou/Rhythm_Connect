@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SongInfo : GeneralFileReader
+public class SongInfo
 {
     public string SongName { get; private set; }    //楽曲名
     public string Genre { get; private set; }       //ジャンル名
@@ -14,13 +14,14 @@ public class SongInfo : GeneralFileReader
     public bool LoadSongInfo(string songname)
     {
         SongName = songname;
-
-        if(LoadFile(myConstants.SongInfoFolderPath + @"\" + songname + ".rcdat") == false)
+        List<string> Lines = new List<string>();
+        Lines = myConstants.LoadFileToList(myConstants.SongInfoFolderPath + @"\" + songname + ".rcdat");
+        if(Lines == null)
         {
             CreateSongInfoFile(songname);
         }
 
-        foreach (string line in Line)
+        foreach (string line in Lines)
         {
             string[] temp = line.Split(' ');
 

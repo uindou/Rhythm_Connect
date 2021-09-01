@@ -4,16 +4,17 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SystemConfig : GeneralFileReader
+public class SystemConfig
 {
     public char[] KeyConfig { get; private set; } = new char[4];
     public string SongDataFolderPath { get; private set; }
 
     public bool LoadSystemConfig(string filename)
     {
-        LoadFile(filename);
+        List<string> Lines = new List<string>();
+        Lines = myConstants.LoadFileToList(filename);
 
-        foreach (string line in Line)
+        foreach (string line in Lines)
         {
             string[] temp = line.Split(' ');
 
