@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private GameConfigManager gcm = new GameConfigManager();
-    private SystemConfigManager scm = new SystemConfigManager();
-    private SongListManager slm = new SongListManager();
+    private GameConfig gc = new GameConfig();
+    private SystemConfig sc = new SystemConfig();
+    private SongList sl = new SongList();
 
     // Start is called before the first frame update
     void Start()
     {
-        gcm.LoadGameConfig("gameconfig.rccfg");
-        scm.LoadSystemConfig("systemconfig.rccfg");
+        gc.LoadGameConfig(myConstants.GameConfigFilePath);
+        sc.LoadSystemConfig(myConstants.SystemConfigFilePath);
 
-        Debug.Log(gcm.GaugeMode);
-        Debug.Log(scm.SongDataFolderPath);
+        Debug.Log(gc.GaugeMode);
+        Debug.Log(sc.SongDataFolderPath);
     }
 
     // Update is called once per frame
