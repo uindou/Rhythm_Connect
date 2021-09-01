@@ -40,6 +40,23 @@ public class SheetData
                     break;
                 
                 case "#ARTIST":
+                    Artist = temp[1];
+                    break;
+                
+                case "#ARRANGER":
+                    Arranger = temp[1];
+                    break;
+
+                case "#STARTBPM":
+                    Bpm = double.Parse(temp[1]);
+                    break;
+
+                case "#PLAYLEVEL":
+                    PlayLevel = int.Parse(temp[1]);
+                    break;
+
+                case "#TOTAL":
+                    Total = double.Parse(temp[1]);
                     break;
 
                 default:

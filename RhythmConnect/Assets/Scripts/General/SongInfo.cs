@@ -6,9 +6,14 @@ public class SongInfo
 {
     public string SongName { get; private set; }    //楽曲名
     public string Genre { get; private set; }       //ジャンル名
+    public string Artist { get; private set; }
+    public string Arranger { get; private set; }
+    public string DispBpm { get; private set; }
+    public int PlayLevel { get; private set; }
     public int NotesNum { get; private set; }       //この譜面に含まれるノートの合計数
     public int HiScore { get; private set; }        //この譜面のハイスコア
     public int MaxCombo { get; private set; }       //この譜面で過去に出したことのある最大コンボ数
+    public int PlayCount { get; private set; }
     
     //曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
     public bool LoadSongInfo(string songname)
@@ -30,6 +35,22 @@ public class SongInfo
                 case "#GENRE":
                     Genre = temp[1];
                     break;
+                
+                case "#ARTIST":
+                    Artist = temp[1];
+                    break;
+                
+                case "#ARRANGER":
+                    Arranger = temp[1];
+                    break;
+
+                case "#DISPBPM":
+                    DispBpm = temp[1];
+                    break;
+
+                case "#PLAYLEVEL":
+                    PlayLevel = int.Parse(temp[1]);
+                    break;
 
                 case "#HISCORE":
                     HiScore = int.Parse(temp[1]);
@@ -41,6 +62,10 @@ public class SongInfo
 
                 case "#MAXCOMBO":
                     MaxCombo = int.Parse(temp[1]);
+                    break;
+                
+                case "#PLAYCOUNT":
+                    PlayCount = int.Parse(temp[1]);
                     break;
 
                 default:
