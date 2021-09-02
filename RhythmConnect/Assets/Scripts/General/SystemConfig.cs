@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class SystemConfig
 {
     public char[] KeyConfig { get; private set; } = new char[4];
-    public string SongDataFolderPath { get; private set; }
 
     public bool LoadSystemConfig(string filename)
     {
@@ -16,7 +15,7 @@ public class SystemConfig
 
         foreach (string line in Lines)
         {
-            string[] temp = line.Split(' ');
+            string[] temp = myConstants.SplitParam(line, " ");
 
             switch (temp[0])
             {
@@ -26,10 +25,6 @@ public class SystemConfig
                     {
                         KeyConfig[j] = kc[j][0];
                     }
-                    break;
-
-                case "#SONGDATAFOLDER":
-                    SongDataFolderPath = temp[1];
                     break;
 
                 default:

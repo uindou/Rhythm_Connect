@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SheetData
 {
-    public string SongDataFolderPath { get; private set; }
     public int NotesNum { get; private set; } = 0;   //譜面に含まれるノーツ数
     public string Genre { get; private set; }   //譜面に含まれる楽曲のジャンル
     public string Artist { get; private set; }
@@ -13,25 +12,14 @@ public class SheetData
     public int PlayLevel { get; private set; }
     public double Total { get; private set; }
 
-    public SheetData()
-    {
-        SongDataFolderPath = "songdata";
-    }
-
-    public SheetData(string songdatafolderpath)
-    {
-        SongDataFolderPath = songdatafolderpath;
-        NotesNum = 0;
-    }
-
-    public bool LoadSheetData(string songname)
+    public bool LoadSheetData(string sheetfilepath)
     {
         List<string> Lines = new List<string>();
-        Lines = myConstants.LoadFileToList(SongDataFolderPath + @"\" + songname + @"\" + songname + ".rcsht");
+        Lines = myConstants.LoadFileToList(sheetfilepath);
 
         foreach (string line in Lines)
         {
-            string[] temp = line.Split(' ');
+            string[] temp = myConstants.SplitParam(line, " ");
 
             switch (temp[0])
             {
@@ -60,10 +48,13 @@ public class SheetData
                     break;
 
                 default:
-                    if(temp[0][0]=='#')
+                    if(temp[0][0]!='#')
                     {
                         break;
                     }
+
+
+
                     break;
             }
         }

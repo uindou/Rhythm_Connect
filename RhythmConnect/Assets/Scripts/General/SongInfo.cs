@@ -16,19 +16,22 @@ public class SongInfo
     public int PlayCount { get; private set; }
     
     //曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
-    public bool LoadSongInfo(string songname)
+    public bool LoadSongInfo(string infodatapath)
     {
-        SongName = songname;
+        string[] t = infodatapath.Split(@"\");
+        string[] u = t[t.Length-1].Split(".");
+        SongName = u[1];
+
         List<string> Lines = new List<string>();
-        Lines = myConstants.LoadFileToList(myConstants.SongInfoFolderPath + @"\" + songname + ".rcdat");
+        Lines = myConstants.LoadFileToList(infodatapath);
         if(Lines == null)
         {
-            CreateSongInfoFile(songname);
+            return false;
         }
 
         foreach (string line in Lines)
         {
-            string[] temp = line.Split(' ');
+            string[] temp = myConstants.SplitParam(line, " ");
 
             switch (temp[0])
             {
@@ -76,9 +79,10 @@ public class SongInfo
         return true;
     }
 
-    //曲情報ファイルを新規に作成する 曲情報ファイルが読み込めなかった際に呼び出される
+    //曲情報ファイルを新規に作成する
+    //関数内でSheetDataを生成して譜面データを読み込ませ、そのデータを元に曲情報を得る
     //成否をBool値で返す（成功でTrue）
-    private bool CreateSongInfoFile(string songname)
+    public bool CreateSongInfoFile(string sheetdatapath)
     {
         return true;
     }
