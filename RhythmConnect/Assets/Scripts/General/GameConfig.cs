@@ -20,7 +20,7 @@ class GameConfig
 
         foreach (string line in Lines)
         {
-            string[] temp = line.Split(' ');
+            string[] temp = myConstants.SplitParam(line, " ");
 
             switch (temp[0])
             {
