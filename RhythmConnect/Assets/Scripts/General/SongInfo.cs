@@ -9,12 +9,36 @@ public class SongInfo
     public string Artist { get; private set; }
     public string Arranger { get; private set; }
     public string DispBpm { get; private set; }
-    public int PlayLevel { get; private set; }
-    public int NotesNum { get; private set; }       //この譜面に含まれるノートの合計数
-    public int HiScore { get; private set; }        //この譜面のハイスコア
-    public int MaxCombo { get; private set; }       //この譜面で過去に出したことのある最大コンボ数
-    public int PlayCount { get; private set; }
-    
+    public int[] PlayLevel { get; private set; } = new int[myConstants.DiffKindNum];
+    public int[] NotesNum { get; private set; } = new int[myConstants.DiffKindNum];       //この譜面に含まれるノートの合計数
+    public int[] HiScore { get; private set; } = new int[myConstants.DiffKindNum];        //この譜面のハイスコア
+    public int[] MaxCombo { get; private set; } = new int[myConstants.DiffKindNum];      //この譜面で過去に出したことのある最大コンボ数
+    public int[] PlayCount { get; private set; } = new int[myConstants.DiffKindNum];
+
+    public SongInfo()
+    {
+        SongName = "TestSong";
+        Genre = "TestSong";
+        Artist = "TestMan";
+        Arranger = "TestFumenTukuriMan";
+        DispBpm = "180";
+        PlayLevel[myConstants.LowDiff] = 3;
+        PlayLevel[myConstants.MidDiff] = 6;
+        PlayLevel[myConstants.HighDiff]= 9;
+        NotesNum[myConstants.LowDiff] = 300;
+        NotesNum[myConstants.MidDiff] = 600;
+        NotesNum[myConstants.HighDiff] = 900;
+        HiScore[myConstants.LowDiff] = 1000000;
+        HiScore[myConstants.MidDiff] = 1000000;
+        HiScore[myConstants.HighDiff] = 1000000;
+        MaxCombo[myConstants.LowDiff] = 300;
+        MaxCombo[myConstants.MidDiff] = 600;
+        MaxCombo[myConstants.HighDiff] = 900;
+        PlayCount[myConstants.LowDiff] = 3;
+        PlayCount[myConstants.MidDiff] = 6;
+        PlayCount[myConstants.HighDiff] = 9;
+    }
+
     //曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
     public bool LoadSongInfo(string infodatapath)
     {
@@ -31,7 +55,8 @@ public class SongInfo
 
         foreach (string line in Lines)
         {
-            string[] temp = myConstants.SplitParam(line, " ");
+            string[] temp = myConstants.SplitParam(line, ' ');
+            string[] s;
 
             switch (temp[0])
             {
@@ -52,23 +77,43 @@ public class SongInfo
                     break;
 
                 case "#PLAYLEVEL":
-                    PlayLevel = int.Parse(temp[1]);
+                    s = temp[1].Split(',');
+                    for(int i = 0;i < myConstants.DiffKindNum;i++)
+                    {
+                        PlayLevel[i] = int.Parse(s[i]);
+                    }
                     break;
 
                 case "#HISCORE":
-                    HiScore = int.Parse(temp[1]);
+                    s = temp[1].Split(',');
+                    for(int i = 0;i < myConstants.DiffKindNum;i++)
+                    {
+                        HiScore[i] = int.Parse(s[i]);
+                    }
                     break;
 
                 case "#NOTESNUM":
-                    NotesNum = int.Parse(temp[1]);
+                    s = temp[1].Split(',');
+                    for(int i = 0;i < myConstants.DiffKindNum;i++)
+                    {
+                        NotesNum[i] = int.Parse(s[i]);
+                    }
                     break;
 
                 case "#MAXCOMBO":
-                    MaxCombo = int.Parse(temp[1]);
+                    s = temp[1].Split(',');
+                    for(int i = 0;i < myConstants.DiffKindNum;i++)
+                    {
+                        MaxCombo[i] = int.Parse(s[i]);
+                    }
                     break;
                 
                 case "#PLAYCOUNT":
-                    PlayCount = int.Parse(temp[1]);
+                    s = temp[1].Split(',');
+                    for(int i = 0;i < myConstants.DiffKindNum;i++)
+                    {
+                        PlayCount[i] = int.Parse(s[i]);
+                    }
                     break;
 
                 default:
@@ -82,8 +127,12 @@ public class SongInfo
     //曲情報ファイルを新規に作成する
     //関数内でSheetDataを生成して譜面データを読み込ませ、そのデータを元に曲情報を得る
     //成否をBool値で返す（成功でTrue）
-    public bool CreateSongInfoFile(string sheetdatapath)
+    public bool CreateSongInfoFile()
     {
+        SheetData sd = new SheetData();
+
+
+
         return true;
     }
 }

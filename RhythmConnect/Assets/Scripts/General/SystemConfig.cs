@@ -15,7 +15,7 @@ public class SystemConfig
 
         foreach (string line in Lines)
         {
-            string[] temp = myConstants.SplitParam(line, " ");
+            string[] temp = myConstants.SplitParam(line, ' ');
 
             switch (temp[0])
             {

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 //ゲームプレイに関わるレベルの設定を保持するクラス
 
-class GameConfig
+public class GameConfig
 {
     public double CalculatedHS { get; private set; }    //BPM*ハイスピードを計算した後の数値 固定HS用
     public double HSMultiplier { get; private set; }    //HS倍率 固定HSを使わない奇特な方向け
@@ -20,7 +20,7 @@ class GameConfig
 
         foreach (string line in Lines)
         {
-            string[] temp = myConstants.SplitParam(line, " ");
+            string[] temp = myConstants.SplitParam(line, ' ');
 
             switch (temp[0])
             {
