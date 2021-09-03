@@ -79,12 +79,12 @@ static class myConstants
         return Folders;
     }
 
-    public static List<string> SplitParam(string source,string splitter)
+    public static string[] SplitParam(string source,string splitter)
     {
-        List<string> rtn = new List<string>();
+        string[] rtn = new string[2];
 
-        rtn.Add(source.Substring(0, source.IndexOf(splitter)));
-        rtn.Add(source.Substring(IndexOf(splitter + 1)));
+        rtn[0] = source.Substring(0, source.IndexOf(splitter));
+        rtn[1] = source.Substring(source.IndexOf(splitter + 1));
 
         return rtn;
     }

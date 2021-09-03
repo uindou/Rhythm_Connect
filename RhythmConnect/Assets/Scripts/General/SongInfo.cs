@@ -18,8 +18,8 @@ public class SongInfo
     //曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
     public bool LoadSongInfo(string infodatapath)
     {
-        string[] t = infodatapath.Split(@"\");
-        string[] u = t[t.Length-1].Split(".");
+        string[] t = infodatapath.Split('\\');
+        string[] u = t[t.Length-1].Split('.');
         SongName = u[1];
 
         List<string> Lines = new List<string>();

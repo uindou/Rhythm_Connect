@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         sc.LoadSystemConfig(myConstants.SystemConfigFilePath);
 
         Debug.Log(gc.GaugeMode);
-        Debug.Log(sc.SongDataFolderPath);
+        Debug.Log(sc.KeyConfig[0]);
     }
 
     // Update is called once per frame
