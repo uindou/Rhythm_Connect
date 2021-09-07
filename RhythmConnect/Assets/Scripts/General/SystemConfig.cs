@@ -4,10 +4,15 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
+//システム設定情報を保持するクラス
 public class SystemConfig
 {
     public char[] KeyConfig { get; private set; } = new char[4];
+    //キーコンフィグ（4つのキー分）
 
+    //LoadSystemConfig
+    //引数で受け取ったファイルからシステム設定を読み込む
+    //成功でTrueを返す
     public bool LoadSystemConfig(string filename)
     {
         List<string> Lines = new List<string>();
