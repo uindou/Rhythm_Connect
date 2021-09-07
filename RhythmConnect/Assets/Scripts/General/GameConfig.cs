@@ -13,6 +13,9 @@ public class GameConfig
     public bool MirrorFlag { get; private set; }        //ミラーオプションの有効状態
     public int GaugeMode { get; private set; }       //ゲージの難易度状態 数値に対応するゲージ状態はmyConstantsクラスを参照の事
 
+    //LoadGameConfig
+    //引数に与えられたファイルからゲームコンフィグを読み込むメソッド
+    //返り値は成功でTrue
     public bool LoadGameConfig(string filename)
     {
         List<string> Lines = new List<string>();

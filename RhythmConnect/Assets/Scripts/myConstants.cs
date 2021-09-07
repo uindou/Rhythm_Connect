@@ -109,6 +109,11 @@ static class myConstants
         return Folders;
     }
 
+
+    //SplitParam
+    //Splitメソッドのマイナーチェンジ
+    //source内で初めて登場したsplitterの位置でsourceを二分する
+    //返り値はSplitメソッドと同様
     public static string[] SplitParam(string source,char splitter)
     {
         string[] rtn = new string[2];

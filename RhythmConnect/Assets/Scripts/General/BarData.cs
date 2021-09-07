@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//小節線データ
 public class BarData
 {
-    public double Rate;
-    public int Count;
-    public int Length;
+    public double Rate { get; set; }    //譜面に定義されている小節長倍率
+    public int Count { get; set; }       //この小節線が画面で実際に流れるタイミング
+    public int Length { get; set; }      //Rateから計算される実際の小節の長さ
 
     public BarData()
     {

@@ -6,17 +6,23 @@ public class SongInfo
 {
     public string SongName { get; private set; }    //楽曲名
     public string Genre { get; private set; }       //ジャンル名
-    public string Artist { get; private set; }
-    public string Arranger { get; private set; }
-    public string DispBpm { get; private set; }
+    public string Artist { get; private set; }      //作曲者名
+    public string Arranger { get; private set; }    //譜面作成者
+    public string DispBpm { get; private set; }     //プレビューで表示するBPM文字列（ソフラン含む）
     public int[] PlayLevel { get; private set; } = new int[myConstants.DiffKindNum];
-    public int[] NotesNum { get; private set; } = new int[myConstants.DiffKindNum];       //この譜面に含まれるノートの合計数
-    public int[] HiScore { get; private set; } = new int[myConstants.DiffKindNum];        //この譜面のハイスコア
-    public int[] MaxCombo { get; private set; } = new int[myConstants.DiffKindNum];      //この譜面で過去に出したことのある最大コンボ数
+    //プレイ難易度（難易度ごとに）
+    public int[] NotesNum { get; private set; } = new int[myConstants.DiffKindNum];
+    //譜面に含まれるノートの合計数（難易度ごとに）
+    public int[] HiScore { get; private set; } = new int[myConstants.DiffKindNum];
+    //譜面のハイスコア（難易度ごとに）
+    public int[] MaxCombo { get; private set; } = new int[myConstants.DiffKindNum];
+    //譜面で過去に出したことのある最大コンボ数（難易度ごとに）
     public int[] PlayCount { get; private set; } = new int[myConstants.DiffKindNum];
+    //譜面をプレイした回数（難易度ごとに）
 
     public SongInfo()
     {
+        //初期化
         SongName = "TestSong";
         Genre = "TestSong";
         Artist = "TestMan";

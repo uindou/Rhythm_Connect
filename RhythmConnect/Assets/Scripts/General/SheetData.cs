@@ -6,19 +6,23 @@ using UnityEngine;
 public class SheetData
 {
     public List<NoteData>[] Notes { get; private set; } = new List<NoteData>[myConstants.LaneNum];
+    //全ノーツを保持するリストの配列（レーン数分）
     public BarData[] Bars { get; private set; } = new BarData[myConstants.MaxBarNum];
+    //全小節線情報を保持するリストの配列（許可された最大小節数分）
     public List<BpmData> BpmList { get; private set; } = new List<BpmData>();
-    public int EndBar { get; private set; } = 0;
-    public int EndCount {get; private set; } = 0;
-    public int NotesNum { get; private set; } = 0;   //譜面に含まれるノーツ数
-    public string Genre { get; private set; }   //譜面に含まれる楽曲のジャンル
-    public string Artist { get; private set; }
-    public string Arranger { get; private set; }
-    public int PlayLevel { get; private set; }
-    public double Total { get; private set; }
+    //全BPM変化情報を保持するリスト
+    public int EndBar { get; private set; } = 0;        //譜面中最後の小節
+    public int EndCount {get; private set; } = 0;       //譜面中最後の小節が流れるタイミング
+    public int NotesNum { get; private set; } = 0;      //譜面に含まれるノーツ数
+    public string Genre { get; private set; }           //譜面に含まれる楽曲のジャンル
+    public string Artist { get; private set; }          //楽曲作成者
+    public string Arranger { get; private set; }        //譜面作成者
+    public int PlayLevel { get; private set; }          //この譜面の難易度
+    public double Total { get; private set; }           //この譜面の全ノーツを最高判定で叩いた時に溜まるゲージ量（Normal想定）
 
     public SheetData()
     {
+        //クラスの配列のインスタンス生成
         for(int i = 0; i < myConstants.LaneNum; i++)
         {
             Notes[i] = new List<NoteData>();
@@ -30,6 +34,9 @@ public class SheetData
         }
     }
 
+    //LoadSheetData
+    //引数に受け取ったファイルから譜面データを読み込む
+    //成功でTrueを返す
     public bool LoadSheetData(string sheetfilepath)
     {
         List<string> Lines = new List<string>();
@@ -41,6 +48,10 @@ public class SheetData
         return true;
     }
 
+    //LoadHeaderData
+    //実際の譜面に関係ないヘッダデータ（作曲者名など）と、小節線情報のみを読み込む
+    //ノーツ情報の読込の際に小節線情報だけ先に分かっていた方が都合がいい
+    //成功でTrueを返す
     private bool LoadHeaderData(List<string> Lines)
     {
         foreach (string line in Lines)
@@ -114,6 +125,9 @@ public class SheetData
         return true;
     }
 
+    //LoadNotesData
+    //ノーツ情報とBPM変化情報を読み込む
+    //成功でTrueを返す
     private bool LoadNotesData(List<string> Lines)
     {
         foreach(string line in Lines)
