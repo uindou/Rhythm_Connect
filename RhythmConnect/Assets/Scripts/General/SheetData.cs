@@ -41,6 +41,10 @@ public class SheetData
     {
         List<string> Lines = new List<string>();
         Lines = myConstants.LoadFileToList(sheetfilepath);
+        if(Lines == null)
+        {
+            return false;
+        }
 
         LoadHeaderData(Lines);
         LoadNotesData(Lines);

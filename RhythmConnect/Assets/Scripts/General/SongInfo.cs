@@ -7,8 +7,9 @@ public class SongInfo
     public string SongName { get; private set; }    //楽曲名
     public string Genre { get; private set; }       //ジャンル名
     public string Artist { get; private set; }      //作曲者名
-    public string Arranger { get; private set; }    //譜面作成者
     public string DispBpm { get; private set; }     //プレビューで表示するBPM文字列（ソフラン含む）
+    public string Arranger { get; private set; } = new string[myConstants.DiffKindNum];
+    //譜面作成者(難易度ごとに)
     public int[] PlayLevel { get; private set; } = new int[myConstants.DiffKindNum];
     //プレイ難易度（難易度ごとに）
     public int[] NotesNum { get; private set; } = new int[myConstants.DiffKindNum];
@@ -26,8 +27,10 @@ public class SongInfo
         SongName = "TestSong";
         Genre = "TestSong";
         Artist = "TestMan";
-        Arranger = "TestFumenTukuriMan";
         DispBpm = "180";
+        Arranger[myConstants.LowDiff] = "TestFumenTukuriMan";
+        Arranger[myConstants.MidDiff] = "TestFumenTukuriMan";
+        Arranger[myConstants.HighDiff] = "TestFumenTukuriMan";
         PlayLevel[myConstants.LowDiff] = 3;
         PlayLevel[myConstants.MidDiff] = 6;
         PlayLevel[myConstants.HighDiff]= 9;
@@ -48,6 +51,7 @@ public class SongInfo
     //曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
     public bool LoadSongInfo(string infodatapath)
     {
+        //引数で受け取ったパスから曲名部分のみ抽出
         string[] t = infodatapath.Split('\\');
         string[] u = t[t.Length-1].Split('.');
         SongName = u[1];
@@ -75,7 +79,11 @@ public class SongInfo
                     break;
                 
                 case "#ARRANGER":
-                    Arranger = temp[1];
+                    s = temp[1].Split(',');
+                    for(int i=0; i < myConstants.DiffKindNum; i++)
+                    {
+                        Arranger[i] = s[i];
+                    }
                     break;
 
                 case "#DISPBPM":
@@ -137,7 +145,7 @@ public class SongInfo
     {
         SheetData sd = new SheetData();
 
-
+        //sd.LoadSheetData(myConstants.SongDataFolderPath);
 
         return true;
     }
