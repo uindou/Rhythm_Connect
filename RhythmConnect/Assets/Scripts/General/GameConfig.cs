@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class GameConfig
 {
-    public double CalculatedHS { get; private set; }    //BPM*ハイスピードを計算した後の数値 固定HS用
-    public double HSMultiplier { get; private set; }    //HS倍率 固定HSを使わない奇特な方向け
+    public double CalculatedHS { get; private set; }    //BPM*ハイスピードの数値 数字に意味はないが固定HS用に適切な倍率を求めるのに必要
+    public double HSMultiplier { get; private set; }    //ハイスピード倍率
     public bool RandomFlag { get; private set; }        //ランダムオプションの有効状態
     public bool MirrorFlag { get; private set; }        //ミラーオプションの有効状態
     public int GaugeMode { get; private set; }       //ゲージの難易度状態 数値に対応するゲージ状態はmyConstantsクラスを参照の事
@@ -20,6 +20,10 @@ public class GameConfig
     {
         List<string> Lines = new List<string>();
         Lines = myConstants.LoadFileToList(filename);
+        if(Lines == null)
+        {
+            return false;
+        }
 
         foreach (string line in Lines)
         {

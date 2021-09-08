@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//譜面中のBPM変化を記録する為のクラス（実質構造体）
+//譜面中のBPM変化を保持するクラス
 public class BpmData
 {
     public double Bpm { get; private set; }

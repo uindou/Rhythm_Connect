@@ -17,6 +17,10 @@ public class SystemConfig
     {
         List<string> Lines = new List<string>();
         Lines = myConstants.LoadFileToList(filename);
+        if(Lines == null)
+        {
+            return false;
+        }
 
         foreach (string line in Lines)
         {

@@ -17,6 +17,10 @@ public class SongList
         List<string> songnames = new List<string>();
 
         songnames = myConstants.LoadSubFolderToList(myConstants.SongDataFolderPath + '\\' + mode);
+        if(songnames == null)
+        {
+            return false;
+        }
 
         foreach(string songname in songnames)
         {
