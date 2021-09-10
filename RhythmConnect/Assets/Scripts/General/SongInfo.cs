@@ -6,11 +6,11 @@ using UnityEngine;
 public class SongInfo
 {
     public string SongName { get; private set; }    //楽曲名
-    public string Mode { get; private set; }        //公式フォルダorユーザー定義フォルダ
+    public int Mode { get; private set; }        //公式フォルダorユーザー定義フォルダ
     public string Genre { get; private set; }       //ジャンル名
     public string Artist { get; private set; }      //作曲者名
     public string DispBpm { get; private set; }     //プレビューで表示するBPM文字列（ソフラン含む）
-    public string Arranger { get; private set; } = new string[myConstants.DiffKindNum];
+    public string[] Arranger { get; private set; } = new string[myConstants.DiffKindNum];
     //譜面作成者(難易度ごとに)
     public int[] PlayLevel { get; private set; } = new int[myConstants.DiffKindNum];
     //プレイ難易度（難易度ごとに）
@@ -67,6 +67,7 @@ public class SongInfo
         }
         catch(FileNotFoundException e)
         {
+            var _e = e.Message;
             CreateSongInfoFile();
         }
         
@@ -75,7 +76,7 @@ public class SongInfo
 
     private bool AnalyseInfoParam(List<string> lines)
     {
-        foreach (string line in Lines)
+        foreach (string line in lines)
         {
             string[] temp = myConstants.SplitParam(line, ' ');
             string[] s;
@@ -146,6 +147,8 @@ public class SongInfo
                     break;
             }
         }
+
+        return true;
     }
 
     //曲情報ファイルを新規に作成する

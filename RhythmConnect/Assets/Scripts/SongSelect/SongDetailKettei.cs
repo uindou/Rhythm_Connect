@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 using TMPro;
 
 public class SongDetailKettei : UIBehaviour
@@ -27,10 +28,19 @@ public class SongDetailKettei : UIBehaviour
     [SerializeField] TextMeshProUGUI UI_BPM;
     [SerializeField] TextMeshProUGUI UI_Notes;
 
+    SongList sl = 
+    List<SongInfo> songList = new List<SongInfo>();
+
     private string low,mid,high;
     private string music_name,artist,genre,arranger;
     private string high_score, max_combo, play_count, clear_rank;
     private string bpm, notes;
+    private static readonly string folder = "All";
+
+    public void Start()
+    {
+        
+    }
 
     public void UpdateItem(int count)
     {
@@ -55,7 +65,7 @@ public class SongDetailKettei : UIBehaviour
         notes = (300 + count).ToString();
 
 
-        //count‚Ì’l¨‹È–¼Aeasy/normal/hard‚Ì“ïˆÕ“x‚ğŒˆ’èAeasy,normal,hard‚É’l‚ğ“ü‚ê‚é@‚»‚Ì‘¼‚¢‚ë‚¢‚ë
+        //countï¿½Ì’lï¿½ï¿½ï¿½È–ï¿½ï¿½Aeasy/normal/hardï¿½Ì“ï¿½Õ“xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aeasy,normal,hardï¿½É’lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ë‚¢ï¿½ï¿½
         music_name_button.text = music_name;
         easy_level_button.text = low;
         normal_level_button.text = mid;
@@ -65,7 +75,7 @@ public class SongDetailKettei : UIBehaviour
     }
     public void OnClick()
     {
-        //‹È‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Ìˆ—B¶‘¤‚Ì‰æ–Ê‚É‹È‚Ìî•ñ‚ğ‚¢‚ë‚¢‚ë•\¦‚·‚éB
+        //ï¿½È‚Ìƒ{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½Ì‰ï¿½Ê‚É‹È‚Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë‚¢ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
         UI_low_level.text = low;
         UI_mid_level.text = mid;
         UI_high_level.text = high;
