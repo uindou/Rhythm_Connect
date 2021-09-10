@@ -31,16 +31,14 @@ static class myConstants
     public static readonly int LongNoteStart = 2;
     public static readonly int LongNoteEnd = 3;
 
-    //ゲージモード対数値 拡張性を考えて念のため採番は間を空けている
-    public static readonly int Easy = 10;
-    public static readonly int Normal = 20;
-    public static readonly int Hard = 30;
-    public static readonly int ExHard = 40;
+    //ゲージモード対数値
+    public static readonly int Easy = 0;
+    public static readonly int Normal = 1;
+    public static readonly int Hard = 2;
+    public static readonly int ExHard = 3;
 
     //難易度に関する各種定数（名前、種類数、インデックス用定数等）
-    public static readonly string LowDiffName = "Simple";
-    public static readonly string MidDiffName = "Decent";
-    public static readonly string HighDiffName = "Complex";
+    public static readonly string[] DiffName = new string[] { "Simple", "Decent", "Complex" };
     public static readonly int LowDiff = 0;
     public static readonly int MidDiff = 1;
     public static readonly int HighDiff = 2;
@@ -51,6 +49,9 @@ static class myConstants
     public static readonly string SystemConfigFilePath = @"config\systemconfig.rccfg";
     public static readonly string SongDataFolderPath = "songdata";
     public static readonly string SongInfoFolderPath = "songinfo";
+    public static readonly int Rc = 0;
+    public static readonly int User = 1;
+    public static readonly string[] ModeString = new string[] { "rc", "user" };
     
 
     //以下コンビニ関数

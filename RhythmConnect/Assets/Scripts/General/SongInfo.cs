@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class SongInfo
 {
     public string SongName { get; private set; }    //楽曲名
+    public string Mode { get; private set; }        //公式フォルダorユーザー定義フォルダ
     public string Genre { get; private set; }       //ジャンル名
     public string Artist { get; private set; }      //作曲者名
     public string DispBpm { get; private set; }     //プレビューで表示するBPM文字列（ソフラン含む）
@@ -25,44 +27,54 @@ public class SongInfo
     {
         //初期化
         SongName = "TestSong";
+        Mode = myConstants.Rc;
         Genre = "TestSong";
         Artist = "TestMan";
         DispBpm = "180";
-        Arranger[myConstants.LowDiff] = "TestFumenTukuriMan";
-        Arranger[myConstants.MidDiff] = "TestFumenTukuriMan";
-        Arranger[myConstants.HighDiff] = "TestFumenTukuriMan";
-        PlayLevel[myConstants.LowDiff] = 3;
-        PlayLevel[myConstants.MidDiff] = 6;
-        PlayLevel[myConstants.HighDiff]= 9;
-        NotesNum[myConstants.LowDiff] = 300;
-        NotesNum[myConstants.MidDiff] = 600;
-        NotesNum[myConstants.HighDiff] = 900;
-        HiScore[myConstants.LowDiff] = 1000000;
-        HiScore[myConstants.MidDiff] = 1000000;
-        HiScore[myConstants.HighDiff] = 1000000;
-        MaxCombo[myConstants.LowDiff] = 300;
-        MaxCombo[myConstants.MidDiff] = 600;
-        MaxCombo[myConstants.HighDiff] = 900;
-        PlayCount[myConstants.LowDiff] = 3;
-        PlayCount[myConstants.MidDiff] = 6;
-        PlayCount[myConstants.HighDiff] = 9;
+        PlayLevel[myConstants.LowDiff] = 0;
+        PlayLevel[myConstants.MidDiff] = 0;
+        PlayLevel[myConstants.HighDiff]= 0;
+        NotesNum[myConstants.LowDiff] = 0;
+        NotesNum[myConstants.MidDiff] = 0;
+        NotesNum[myConstants.HighDiff] = 0;
+        HiScore[myConstants.LowDiff] = 0;
+        HiScore[myConstants.MidDiff] = 0;
+        HiScore[myConstants.HighDiff] = 0;
+        MaxCombo[myConstants.LowDiff] = 0;
+        MaxCombo[myConstants.MidDiff] = 0;
+        MaxCombo[myConstants.HighDiff] = 0;
+        PlayCount[myConstants.LowDiff] = 0;
+        PlayCount[myConstants.MidDiff] = 0;
+        PlayCount[myConstants.HighDiff] = 0;
     }
 
     //曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
-    public bool LoadSongInfo(string infodatapath)
+    public bool LoadSongInfo(string songname, int mode)
     {
-        //引数で受け取ったパスから曲名部分のみ抽出
-        string[] t = infodatapath.Split('\\');
-        string[] u = t[t.Length-1].Split('.');
-        SongName = u[1];
+        SongName = songname;
+        Mode = mode;
 
-        List<string> Lines = new List<string>();
-        Lines = myConstants.LoadFileToList(infodatapath);
-        if(Lines == null)
+        try 
         {
-            return false;
-        }
+            List<string> Lines = new List<string>();
+            Lines = myConstants.LoadFileToList(myConstants.SongInfoFolderPath + '\\' + myConstants.ModeString[Mode] + '\\' + SongName + ".rcdat");
+            if(Lines == null)
+            {
+                return false;
+            }
 
+            AnalyseInfoParam(Lines);
+        }
+        catch(FileNotFoundException e)
+        {
+            CreateSongInfoFile();
+        }
+        
+        return true;
+    }
+
+    private bool AnalyseInfoParam(List<string> lines)
+    {
         foreach (string line in Lines)
         {
             string[] temp = myConstants.SplitParam(line, ' ');
@@ -73,11 +85,11 @@ public class SongInfo
                 case "#GENRE":
                     Genre = temp[1];
                     break;
-                
+                    
                 case "#ARTIST":
                     Artist = temp[1];
                     break;
-                
+                    
                 case "#ARRANGER":
                     s = temp[1].Split(',');
                     for(int i=0; i < myConstants.DiffKindNum; i++)
@@ -121,7 +133,7 @@ public class SongInfo
                         MaxCombo[i] = int.Parse(s[i]);
                     }
                     break;
-                
+                    
                 case "#PLAYCOUNT":
                     s = temp[1].Split(',');
                     for(int i = 0;i < myConstants.DiffKindNum;i++)
@@ -134,8 +146,6 @@ public class SongInfo
                     break;
             }
         }
-        
-        return true;
     }
 
     //曲情報ファイルを新規に作成する
@@ -144,8 +154,23 @@ public class SongInfo
     public bool CreateSongInfoFile()
     {
         SheetData sd = new SheetData();
+        
+        List<string> Lines = new List<string>();
+        Lines = myConstants.LoadFileToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[Mode] + '\\' + SongName + '\\' + "Info.rcdat");
+        //songdata\mode\songname\Info.rcdat
 
-        //sd.LoadSheetData(myConstants.SongDataFolderPath);
+        if(Lines == null)
+        {
+            return false;
+        }
+
+        AnalyseInfoParam(Lines);
+
+        for(int i = 0; i < myConstants.DiffKindNum; i++)
+        {
+            sd.LoadSheetData(SongName, Mode, i);
+            NotesNum[i] = sd.NotesNum;
+        }
 
         return true;
     }
