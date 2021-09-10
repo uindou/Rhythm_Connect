@@ -27,20 +27,13 @@ public class SongDetailKettei : UIBehaviour
 
     [SerializeField] TextMeshProUGUI UI_BPM;
     [SerializeField] TextMeshProUGUI UI_Notes;
-
-    SongList sl = 
-    List<SongInfo> songList = new List<SongInfo>();
+    List<SongInfo> songList;
 
     private string low,mid,high;
     private string music_name,artist,genre,arranger;
     private string high_score, max_combo, play_count, clear_rank;
     private string bpm, notes;
     private static readonly string folder = "All";
-
-    public void Start()
-    {
-        
-    }
 
     public void UpdateItem(int count)
     {
