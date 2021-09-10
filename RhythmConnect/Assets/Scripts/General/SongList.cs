@@ -12,29 +12,28 @@ public class SongList
     //引数で受け取ったモード（ユーザ定義譜面フォルダor公式譜面フォルダ）に応じて、該当するフォルダの曲情報を全て読み込む
     //myConstantsにまあまあ依存している。
     //成功でTrueを返す
-    public bool LoadSongList(string mode)
+    public bool LoadSongList()
     {
         List<string> songnames = new List<string>();
-
-        songnames = myConstants.LoadSubFolderToList(myConstants.SongDataFolderPath + '\\' + mode);
-        if(songnames == null)
-        {
-            return false;
-        }
         
-        for(int i = 0;i < 2;i++)
+        for(int mode = 0;mode < 2;mode++)
         {
+            songnames = myConstants.LoadSubFolderToList(myConstants.SongDataFolderPath + '\\' + mode);
+            if(songnames == null)
+            {
+                return false;
+            }
+
             foreach(string songname in songnames)
             {
                 SongInfo temp = new SongInfo();
-                if(temp.LoadSongInfo(songname, i))
+                if(temp.LoadSongInfo(songname, mode))
                 {
                     continue;
                 }
                 Songs.Add(temp);
             }
         }
-        
 
         return true;
     }
