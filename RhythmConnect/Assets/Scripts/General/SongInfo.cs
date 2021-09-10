@@ -6,18 +6,52 @@ public class SongInfo
 {
     public string SongName { get; private set; }    //楽曲名
     public string Genre { get; private set; }       //ジャンル名
-    public string Artist { get; private set; }
-    public string Arranger { get; private set; }
-    public string DispBpm { get; private set; }
-    public int PlayLevel { get; private set; }
-    public int NotesNum { get; private set; }       //この譜面に含まれるノートの合計数
-    public int HiScore { get; private set; }        //この譜面のハイスコア
-    public int MaxCombo { get; private set; }       //この譜面で過去に出したことのある最大コンボ数
-    public int PlayCount { get; private set; }
-    
+    public string Artist { get; private set; }      //作曲者名
+    public string DispBpm { get; private set; }     //プレビューで表示するBPM文字列（ソフラン含む）
+    public string Arranger { get; private set; } = new string[myConstants.DiffKindNum];
+    //譜面作成者(難易度ごとに)
+    public int[] PlayLevel { get; private set; } = new int[myConstants.DiffKindNum];
+    //プレイ難易度（難易度ごとに）
+    public int[] NotesNum { get; private set; } = new int[myConstants.DiffKindNum];
+    //譜面に含まれるノートの合計数（難易度ごとに）
+    public int[] HiScore { get; private set; } = new int[myConstants.DiffKindNum];
+    //譜面のハイスコア（難易度ごとに）
+    public int[] MaxCombo { get; private set; } = new int[myConstants.DiffKindNum];
+    //譜面で過去に出したことのある最大コンボ数（難易度ごとに）
+    public int[] PlayCount { get; private set; } = new int[myConstants.DiffKindNum];
+    //譜面をプレイした回数（難易度ごとに）
+
+    public SongInfo()
+    {
+        //初期化
+        SongName = "TestSong";
+        Genre = "TestSong";
+        Artist = "TestMan";
+        DispBpm = "180";
+        Arranger[myConstants.LowDiff] = "TestFumenTukuriMan";
+        Arranger[myConstants.MidDiff] = "TestFumenTukuriMan";
+        Arranger[myConstants.HighDiff] = "TestFumenTukuriMan";
+        PlayLevel[myConstants.LowDiff] = 3;
+        PlayLevel[myConstants.MidDiff] = 6;
+        PlayLevel[myConstants.HighDiff]= 9;
+        NotesNum[myConstants.LowDiff] = 300;
+        NotesNum[myConstants.MidDiff] = 600;
+        NotesNum[myConstants.HighDiff] = 900;
+        HiScore[myConstants.LowDiff] = 1000000;
+        HiScore[myConstants.MidDiff] = 1000000;
+        HiScore[myConstants.HighDiff] = 1000000;
+        MaxCombo[myConstants.LowDiff] = 300;
+        MaxCombo[myConstants.MidDiff] = 600;
+        MaxCombo[myConstants.HighDiff] = 900;
+        PlayCount[myConstants.LowDiff] = 3;
+        PlayCount[myConstants.MidDiff] = 6;
+        PlayCount[myConstants.HighDiff] = 9;
+    }
+
     //曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
     public bool LoadSongInfo(string infodatapath)
     {
+        //引数で受け取ったパスから曲名部分のみ抽出
         string[] t = infodatapath.Split('\\');
         string[] u = t[t.Length-1].Split('.');
         SongName = u[1];
@@ -31,7 +65,8 @@ public class SongInfo
 
         foreach (string line in Lines)
         {
-            string[] temp = myConstants.SplitParam(line, " ");
+            string[] temp = myConstants.SplitParam(line, ' ');
+            string[] s;
 
             switch (temp[0])
             {
@@ -44,7 +79,11 @@ public class SongInfo
                     break;
                 
                 case "#ARRANGER":
-                    Arranger = temp[1];
+                    s = temp[1].Split(',');
+                    for(int i=0; i < myConstants.DiffKindNum; i++)
+                    {
+                        Arranger[i] = s[i];
+                    }
                     break;
 
                 case "#DISPBPM":
@@ -52,23 +91,43 @@ public class SongInfo
                     break;
 
                 case "#PLAYLEVEL":
-                    PlayLevel = int.Parse(temp[1]);
+                    s = temp[1].Split(',');
+                    for(int i = 0;i < myConstants.DiffKindNum;i++)
+                    {
+                        PlayLevel[i] = int.Parse(s[i]);
+                    }
                     break;
 
                 case "#HISCORE":
-                    HiScore = int.Parse(temp[1]);
+                    s = temp[1].Split(',');
+                    for(int i = 0;i < myConstants.DiffKindNum;i++)
+                    {
+                        HiScore[i] = int.Parse(s[i]);
+                    }
                     break;
 
                 case "#NOTESNUM":
-                    NotesNum = int.Parse(temp[1]);
+                    s = temp[1].Split(',');
+                    for(int i = 0;i < myConstants.DiffKindNum;i++)
+                    {
+                        NotesNum[i] = int.Parse(s[i]);
+                    }
                     break;
 
                 case "#MAXCOMBO":
-                    MaxCombo = int.Parse(temp[1]);
+                    s = temp[1].Split(',');
+                    for(int i = 0;i < myConstants.DiffKindNum;i++)
+                    {
+                        MaxCombo[i] = int.Parse(s[i]);
+                    }
                     break;
                 
                 case "#PLAYCOUNT":
-                    PlayCount = int.Parse(temp[1]);
+                    s = temp[1].Split(',');
+                    for(int i = 0;i < myConstants.DiffKindNum;i++)
+                    {
+                        PlayCount[i] = int.Parse(s[i]);
+                    }
                     break;
 
                 default:
@@ -82,8 +141,12 @@ public class SongInfo
     //曲情報ファイルを新規に作成する
     //関数内でSheetDataを生成して譜面データを読み込ませ、そのデータを元に曲情報を得る
     //成否をBool値で返す（成功でTrue）
-    public bool CreateSongInfoFile(string sheetdatapath)
+    public bool CreateSongInfoFile()
     {
+        SheetData sd = new SheetData();
+
+        //sd.LoadSheetData(myConstants.SongDataFolderPath);
+
         return true;
     }
 }
