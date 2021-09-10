@@ -14,10 +14,6 @@ public class SheetData
     public int EndBar { get; private set; } = 0;        //譜面中最後の小節
     public int EndCount {get; private set; } = 0;       //譜面中最後の小節が流れるタイミング
     public int NotesNum { get; private set; } = 0;      //譜面に含まれるノーツ数
-    public string Genre { get; private set; }           //譜面に含まれる楽曲のジャンル
-    public string Artist { get; private set; }          //楽曲作成者
-    public string Arranger { get; private set; }        //譜面作成者
-    public int PlayLevel { get; private set; }          //この譜面の難易度
     public double Total { get; private set; }           //この譜面の全ノーツを最高判定で叩いた時に溜まるゲージ量（Normal想定）
 
     public SheetData()
@@ -37,10 +33,10 @@ public class SheetData
     //LoadSheetData
     //引数に受け取ったファイルから譜面データを読み込む
     //成功でTrueを返す
-    public bool LoadSheetData(string sheetfilepath)
+    public bool LoadSheetData(string songname, int mode, int diff)
     {
         List<string> Lines = new List<string>();
-        Lines = myConstants.LoadFileToList(sheetfilepath);
+        Lines = myConstants.LoadFileToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[mode] + "\\sheet\\" + myConstants.DiffName[diff] + ".rcsht");
 
         LoadHeaderData(Lines);
         LoadNotesData(Lines);
@@ -65,25 +61,9 @@ public class SheetData
 
             switch (temp[0])
             {
-                case "#GENRE":
-                    Genre = temp[1];
-                    break;
-                
-                case "#ARTIST":
-                    Artist = temp[1];
-                    break;
-                
-                case "#ARRANGER":
-                    Arranger = temp[1];
-                    break;
-
                 case "#STARTBPM":
                     BpmData startbpm = new BpmData(double.Parse(temp[1]), 0);
                     BpmList.Add(startbpm);
-                    break;
-
-                case "#PLAYLEVEL":
-                    PlayLevel = int.Parse(temp[1]);
                     break;
 
                 case "#TOTAL":

@@ -18,16 +18,18 @@ public class SongList
 
         songnames = myConstants.LoadSubFolderToList(myConstants.SongDataFolderPath + '\\' + mode);
 
-        foreach(string songname in songnames)
+        for(int i = 0;i < 2;i++)
         {
-            SongInfo temp = new SongInfo();
-            if(temp.LoadSongInfo(myConstants.SongInfoFolderPath + '\\' + mode + '\\' + songname) == false)
+            foreach(string songname in songnames)
             {
-                continue;
+                SongInfo temp = new SongInfo();
+                if(temp.LoadSongInfo(songname, i))
+                {
+                    continue;
+                }
+                Songs.Add(temp);
             }
-            Songs.Add(temp);
         }
-
         return true;
     }
 }
