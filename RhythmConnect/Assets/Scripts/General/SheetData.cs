@@ -37,6 +37,10 @@ public class SheetData
     {
         List<string> Lines = new List<string>();
         Lines = myConstants.LoadFileToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[mode] + "\\sheet\\" + myConstants.DiffName[diff] + ".rcsht");
+        if(Lines == null)
+        {
+            return false;
+        }
 
         LoadHeaderData(Lines);
         LoadNotesData(Lines);

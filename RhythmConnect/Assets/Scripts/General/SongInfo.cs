@@ -9,8 +9,9 @@ public class SongInfo
     public string Mode { get; private set; }        //公式フォルダorユーザー定義フォルダ
     public string Genre { get; private set; }       //ジャンル名
     public string Artist { get; private set; }      //作曲者名
-    public string Arranger { get; private set; }    //譜面作成者
     public string DispBpm { get; private set; }     //プレビューで表示するBPM文字列（ソフラン含む）
+    public string Arranger { get; private set; } = new string[myConstants.DiffKindNum];
+    //譜面作成者(難易度ごとに)
     public int[] PlayLevel { get; private set; } = new int[myConstants.DiffKindNum];
     //プレイ難易度（難易度ごとに）
     public int[] NotesNum { get; private set; } = new int[myConstants.DiffKindNum];
@@ -29,7 +30,6 @@ public class SongInfo
         Mode = myConstants.Rc;
         Genre = "TestSong";
         Artist = "TestMan";
-        Arranger = "TestFumenTukuriMan";
         DispBpm = "180";
         PlayLevel[myConstants.LowDiff] = 0;
         PlayLevel[myConstants.MidDiff] = 0;
@@ -91,7 +91,11 @@ public class SongInfo
                     break;
                     
                 case "#ARRANGER":
-                    Arranger = temp[1];
+                    s = temp[1].Split(',');
+                    for(int i=0; i < myConstants.DiffKindNum; i++)
+                    {
+                        Arranger[i] = s[i];
+                    }
                     break;
 
                 case "#DISPBPM":
@@ -150,7 +154,7 @@ public class SongInfo
     public bool CreateSongInfoFile()
     {
         SheetData sd = new SheetData();
-
+        
         List<string> Lines = new List<string>();
         Lines = myConstants.LoadFileToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[Mode] + '\\' + SongName + '\\' + "Info.rcdat");
         //songdata\mode\songname\Info.rcdat

@@ -27,25 +27,34 @@ public class SongShuflle : MonoBehaviour
     // Start is called before the first frame update
 
 
+    public void LeftTurn()
+    {
+        if (now_song == 0)
+        {
+            now_song = song_num - 1;
+        }
+        else
+        {
+            now_song -= 1;
+        }
+        SetChange();
+    }
+
+    public void RightTurn()
+    {
+        now_song = (now_song + 1) % song_num;
+        SetChange();
+    }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (now_song == 0)
-            {
-                now_song = song_num - 1;
-            }
-            else
-            {
-                now_song -= 1;
-            }
-            SetChange();
+            LeftTurn();
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            now_song = (now_song + 1)%song_num;
-            SetChange();
+            RightTurn();
         }
     }
     void SetChange()
@@ -61,12 +70,12 @@ public class SongShuflle : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            song_name.text = SongDatas[(now_song + i) % song_num].song_name;
-            song_credit.text = SongDatas[(now_song + i) % song_num].credit;
-            song_score.text = SongDatas[(now_song + i) % song_num].score.ToString();
-            song_notes.text = SongDatas[(now_song + i) % song_num].notes.ToString();
+            int j = (now_song + i) % song_num;
+            song_name.text = SongDatas[j].song_name;
+            song_credit.text = SongDatas[j].credit;
+            song_score.text = SongDatas[j].score.ToString();
+            song_notes.text = SongDatas[j].notes.ToString();
         }
-            
     }
 
     private void LoadSongDatas()

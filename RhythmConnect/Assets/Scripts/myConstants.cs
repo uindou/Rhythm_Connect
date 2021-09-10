@@ -75,7 +75,7 @@ static class myConstants
         }
         catch (FileNotFoundException e)
         {
-            Debug.Log("file load failed.");
+            Debug.Log("file not found.");
             Debug.Log(e.Message);
 
             return null;
