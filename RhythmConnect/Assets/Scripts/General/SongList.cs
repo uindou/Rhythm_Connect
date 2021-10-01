@@ -18,7 +18,7 @@ public class SongList
         
         for(int mode = 0;mode < 2;mode++)
         {
-            songnames = myConstants.LoadSubFolderToList(myConstants.SongDataFolderPath + '\\' + mode);
+            songnames = myConstants.LoadSubFolderToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[mode]);
             if(songnames == null)
             {
                 return false;
@@ -27,10 +27,10 @@ public class SongList
             foreach(string songname in songnames)
             {
                 SongInfo temp = new SongInfo();
-                if(temp.LoadSongInfo(songname, mode))
-                {
-                    continue;
-                }
+                string str;
+                str = songname.Split('\\')[songname.Split('\\').Length - 1];
+                Debug.Log("LoadSongInfo from " + str);
+                temp.LoadSongInfo(str, mode);
                 Songs.Add(temp);
             }
         }

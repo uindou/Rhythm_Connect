@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.IO;
 using System.Collections.Generic;
 using TMPro;
 
@@ -27,35 +28,50 @@ public class SongDetailKettei : UIBehaviour
 
     [SerializeField] TextMeshProUGUI UI_BPM;
     [SerializeField] TextMeshProUGUI UI_Notes;
-    List<SongInfo> songList;
 
+    private GameObject go;
+    [SerializeField] private Image jacket;
+    private GameManager gm;
+    private List<SongInfo> songList;
+
+    private int cursol = 0;
     private string low,mid,high;
     private string music_name,artist,genre,arranger;
     private string high_score, max_combo, play_count, clear_rank;
     private string bpm, notes;
     private static readonly string folder = "All";
 
+    void Awake()
+    {
+        Debug.Log("Awake");
+        go = GameObject.Find("GameManager");
+        Debug.Log("GameObject Load");
+        gm = go.GetComponent<GameManager>();
+        Debug.Log("GameManager Load");
+        songList = gm.sl.Songs;
+    }
+
     public void UpdateItem(int count)
     {
-        Debug.Log(count);
+        int ringcount = count % songList.Count;
 
+        low = songList[ringcount].PlayLevel[myConstants.LowDiff].ToString();
+        mid = songList[ringcount].PlayLevel[myConstants.MidDiff].ToString();
+        high = songList[ringcount].PlayLevel[myConstants.HighDiff].ToString();
 
-        low = count.ToString();
-        mid = (count + 1).ToString();
-        high = (count + 2).ToString();
+        music_name = songList[ringcount].SongName;
+        artist = songList[ringcount].Artist;
+        genre = songList[ringcount].Genre;
+        arranger = songList[ringcount].Arranger[myConstants.LowDiff];
 
-        music_name = "SUSURU_TV ver" + count.ToString();
-        artist = "SUSURU";
-        genre = "Internet meme";
-        arranger = "Moriyama Naotaro";
-
-        high_score = (100*count).ToString();
-        max_combo = "0";
-        play_count = count.ToString();
+        high_score = songList[ringcount].HiScore[myConstants.LowDiff].ToString();
+        max_combo = songList[ringcount].MaxCombo[myConstants.LowDiff].ToString();
+        play_count = songList[ringcount].PlayCount[myConstants.LowDiff].ToString();
         clear_rank = "A";
 
-        bpm = (100 + count).ToString();
-        notes = (300 + count).ToString();
+        bpm = songList[ringcount].DispBpm;
+        notes = songList[ringcount].NotesNum[myConstants.LowDiff].ToString();
+        cursol = ringcount;
 
 
         //count�̒l���Ȗ��Aeasy/normal/hard�̓�Փx������Aeasy,normal,hard�ɒl������@���̑����낢��
@@ -85,5 +101,27 @@ public class SongDetailKettei : UIBehaviour
 
         UI_BPM.text = "BPM:"+bpm;
         UI_Notes.text = "Notes:"+notes;
+
+        Texture2D tex = readByBinary(readPngFile(myConstants.SongDataFolderPath + "\\" + myConstants.ModeString[songList[cursol].Mode] + "\\" + songList[cursol].SongName + "\\" + "Jacket.jpg"));
+        jacket.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero); 
+    }
+
+    public byte[] readPngFile(string path)
+    {
+        using (FileStream fileStream = new FileStream (path, FileMode.Open, FileAccess.Read)) {
+            BinaryReader bin = new BinaryReader (fileStream);
+            byte[] values = bin.ReadBytes ((int)bin.BaseStream.Length);
+            bin.Close ();
+            return values;
+        }
+    }
+
+    public Texture2D readByBinary(byte[] bytes)
+    {
+        Texture2D texture = new Texture2D (1, 1);
+        texture.LoadImage (bytes);
+        return texture;
     }
 }
+
+
