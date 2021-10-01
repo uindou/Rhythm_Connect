@@ -54,21 +54,17 @@ public class SongInfo
         SongName = songname;
         Mode = mode;
 
-        try 
-        {
-            List<string> Lines = new List<string>();
-            Lines = myConstants.LoadFileToList(myConstants.SongInfoFolderPath + '\\' + myConstants.ModeString[Mode] + '\\' + SongName + ".rcdat");
-            if(Lines == null)
-            {
-                return false;
-            }
+        Debug.Log("Loading " + SongName);
 
-            AnalyseInfoParam(Lines);
-        }
-        catch(FileNotFoundException e)
+        List<string> Lines = new List<string>();
+        Lines = myConstants.LoadFileToList(myConstants.SongInfoFolderPath + '\\' + myConstants.ModeString[Mode] + '\\' + SongName + ".rcdat");
+        if(Lines == null)
         {
-            var _e = e.Message;
             CreateSongInfoFile();
+        }
+        else
+        {
+            AnalyseInfoParam(Lines);
         }
         
         return true;
@@ -78,7 +74,17 @@ public class SongInfo
     {
         foreach (string line in lines)
         {
-            string[] temp = myConstants.SplitParam(line, ' ');
+            string[] temp;
+
+            if(line != "")
+            {
+                temp = myConstants.SplitParam(line, ' ');
+            }
+            else
+            {
+                continue;
+            }
+            
             string[] s;
 
             switch (temp[0])
@@ -147,7 +153,7 @@ public class SongInfo
                     break;
             }
         }
-
+        Debug.Log(SongName + " " + Artist);
         return true;
     }
 
@@ -156,9 +162,12 @@ public class SongInfo
     //成否をBool値で返す（成功でTrue）
     public bool CreateSongInfoFile()
     {
+        Debug.Log("Start CreateSongInfoFile " + SongName);
+
         SheetData sd = new SheetData();
         
         List<string> Lines = new List<string>();
+        
         Lines = myConstants.LoadFileToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[Mode] + '\\' + SongName + '\\' + "Info.rcdat");
         //songdata\mode\songname\Info.rcdat
 

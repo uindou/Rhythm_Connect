@@ -36,7 +36,7 @@ public class SheetData
     public bool LoadSheetData(string songname, int mode, int diff)
     {
         List<string> Lines = new List<string>();
-        Lines = myConstants.LoadFileToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[mode] + "\\sheet\\" + myConstants.DiffName[diff] + ".rcsht");
+        Lines = myConstants.LoadFileToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[mode] + '\\' + songname + "\\sheet\\" + myConstants.DiffName[diff] + ".rcsht");
         if(Lines == null)
         {
             return false;
@@ -56,8 +56,17 @@ public class SheetData
     {
         foreach (string line in Lines)
         {
-            string[] temp = myConstants.SplitParam(line, ' ');
+            string[] temp;
 
+            if(line != "")
+            {
+                temp = myConstants.SplitParam(line, ' ');
+            }
+            else
+            {
+                continue;
+            }
+            
             if(temp[0][0]!='#')
             {
                 continue;
@@ -74,9 +83,12 @@ public class SheetData
                     Total = double.Parse(temp[1]);
                     break;
 
+                case "#OFFSET":
+                    break;
+
                 default:
                     int barnum = int.Parse(temp[0].Substring(1, 3));
-                    int channel = int.Parse(temp[0].Substring(5, 2));
+                    int channel = int.Parse(temp[0].Substring(4, 2));
 
                     if(channel == myConstants.Channel_ChangeBarRate)
                     {
@@ -116,15 +128,30 @@ public class SheetData
     {
         foreach(string line in Lines)
         {
-            string[] temp = myConstants.SplitParam(line, ' ');
+            string[] temp;
+            if(line != "")
+            {
+                temp = myConstants.SplitParam(line, ' ');
+            }
+            else
+            {
+                continue;
+            }
+
+            int trash;
 
             if(temp[0][0] != '#')
             {
                 continue;
             }
 
+            if(int.TryParse(temp[0].Substring(1,5),out trash) == false)
+            {
+                continue;
+            }
+
             int barnum = int.Parse(temp[0].Substring(1, 3));
-            int channel = int.Parse(temp[0].Substring(5, 2));
+            int channel = int.Parse(temp[0].Substring(4, 2));
 
             if(channel == myConstants.Channel_ChangeBarRate)
             {
@@ -141,7 +168,7 @@ public class SheetData
             
             for(int i = 0; i < temp[1].Length; i++)
             {
-                if(temp[1][i] == 0)
+                if(temp[1][i] == '0')
                 {
                     continue;
                 }

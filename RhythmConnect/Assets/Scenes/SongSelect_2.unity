@@ -2341,6 +2341,7 @@ MonoBehaviour:
   UI_ClearRank: {fileID: 478645086}
   UI_BPM: {fileID: 1972752379}
   UI_Notes: {fileID: 1301437519}
+  jacket: {fileID: 692146434}
 --- !u!114 &1076458913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3699,7 +3700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemPrototype: {fileID: 1076458911}
-  instantateItemCount: 15
+  instantateItemCount: 10
   direction: 0
   onUpdateItem:
     m_PersistentCalls:

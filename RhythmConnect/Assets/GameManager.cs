@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private GameConfig gc = new GameConfig();
-    private SystemConfig sc = new SystemConfig();
-    private SongList sl = new SongList();
+    public GameConfig gc { get; private set; } = new GameConfig();
+    public SystemConfig sc { get; private set; } = new SystemConfig();
+    public SongList sl { get; private set; } = new SongList();
 
     void Awake()
     {
@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour
         sc.LoadSystemConfig(myConstants.SystemConfigFilePath);
         sl.LoadSongList();
 
-        Debug.Log(gc.GaugeMode);
-        Debug.Log(sc.KeyConfig[0]);
+        //Debug.Log(gc.GaugeMode);
+        //Debug.Log(sc.KeyConfig[0]);
     }
 
     // Update is called once per frame
