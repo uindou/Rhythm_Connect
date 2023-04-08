@@ -12,7 +12,7 @@ public class SheetData
     public List<BpmData> BpmList { get; private set; } = new List<BpmData>();
     //全BPM変化情報を保持するリスト
     public int EndBar { get; private set; } = 0;        //譜面中最後の小節
-    public int EndCount {get; private set; } = 0;       //譜面中最後の小節が流れるタイミング
+    public int EndCount { get; private set; } = 0;       //譜面中最後の小節が流れるタイミング
     public int NotesNum { get; private set; } = 0;      //譜面に含まれるノーツ数
     public double Total { get; private set; }           //この譜面の全ノーツを最高判定で叩いた時に溜まるゲージ量（Normal想定）
 
