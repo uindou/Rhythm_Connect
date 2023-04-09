@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// 楽曲情報
+/// </summary>
 public class SongInfo
 {
     public string SongName { get; private set; }    //楽曲名
@@ -48,7 +51,12 @@ public class SongInfo
         PlayCount[myConstants.HighDiff] = 0;
     }
 
-    //曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
+    /// <summary>
+    /// 曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
+    /// </summary>
+    /// <param name="songname"></param>
+    /// <param name="mode"></param>
+    /// <returns>成否（成功でTrue）</returns>
     public bool LoadSongInfo(string songname, int mode)
     {
         SongName = songname;
@@ -58,19 +66,26 @@ public class SongInfo
 
         List<string> Lines = new List<string>();
         Lines = myConstants.LoadFileToList(myConstants.SongInfoFolderPath + '\\' + myConstants.ModeString[Mode] + '\\' + SongName + ".rcdat");
+        //ex. songinfo\rc\songname.rcdat
         if(Lines == null)
         {
+            //対象のファイルがなかった場合（初回読込の場合）、新たに生成する。
             CreateSongInfoFile();
         }
         else
         {
-            AnalyseInfoParam(Lines);
+            ReadInfoParam(Lines);
         }
         
         return true;
     }
 
-    private bool AnalyseInfoParam(List<string> lines)
+    /// <summary>
+    /// SongInfoファイルの中身をListとして受け取り、パラメータを読み込む。
+    /// </summary>
+    /// <param name="lines"></param>
+    /// <returns>成否（成功でTrue）</returns>
+    private bool ReadInfoParam(List<string> lines)
     {
         foreach (string line in lines)
         {
@@ -87,6 +102,7 @@ public class SongInfo
             
             string[] s;
 
+            //FIXME : Parseを使ってる部分は後でTryParseにしないと例外吐いたら実行止まる
             switch (temp[0])
             {
                 case "#GENRE":
@@ -149,6 +165,7 @@ public class SongInfo
                     }
                     break;
 
+                //どのパラメータにも一致しない場合は読み飛ばす
                 default:
                     break;
             }
@@ -157,9 +174,10 @@ public class SongInfo
         return true;
     }
 
-    //曲情報ファイルを新規に作成する
-    //関数内でSheetDataを生成して譜面データを読み込ませ、そのデータを元に曲情報を得る
-    //成否をBool値で返す（成功でTrue）
+    /// <summary>
+    /// 曲情報ファイルを新規に作成し、読み込む
+    /// </summary>
+    /// <returns>成否（成功でTrue）</returns>
     public bool CreateSongInfoFile()
     {
         Debug.Log("Start CreateSongInfoFile " + SongName);
@@ -168,16 +186,18 @@ public class SongInfo
         
         List<string> Lines = new List<string>();
         
+        //楽曲パッケージは譜面データ以外に作曲者情報などを記載したInfoファイルを持つ
         Lines = myConstants.LoadFileToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[Mode] + '\\' + SongName + '\\' + "Info.rcdat");
-        //songdata\mode\songname\Info.rcdat
+        //ex. songdata\mode\songname\Info.rcdat
 
         if(Lines == null)
         {
             return false;
         }
 
-        AnalyseInfoParam(Lines);
+        ReadInfoParam(Lines);
 
+        //ノーツ数を得るために譜面データも読み込む
         for(int i = 0; i < myConstants.DiffKindNum; i++)
         {
             sd.LoadSheetData(SongName, Mode, i);

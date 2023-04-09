@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//ゲームプレイに関わるレベルの設定を保持するクラス
-
+/// <summary>
+/// ゲームプレイに関わるレベルの設定を保持するクラス
+/// </summary>
 public class GameConfig
 {
     public double CalculatedHS { get; private set; }    //BPM*ハイスピードの数値 数字に意味はないが固定HS用に適切な倍率を求めるのに必要
@@ -13,9 +14,11 @@ public class GameConfig
     public bool MirrorFlag { get; private set; }        //ミラーオプションの有効状態
     public int GaugeMode { get; private set; }       //ゲージの難易度状態 数値に対応するゲージ状態はmyConstantsクラスを参照の事
 
-    //LoadGameConfig
-    //引数に与えられたファイルからゲームコンフィグを読み込むメソッド
-    //返り値は成功でTrue
+    /// <summary>
+    /// 引数に与えられたファイルからゲームコンフィグを読み込むメソッド
+    /// </summary>
+    /// <param name="filename"></param>
+    /// <returns>成功でTrue 1行もなければFalse</returns>
     public bool LoadGameConfig(string filename)
     {
         List<string> Lines = new List<string>();

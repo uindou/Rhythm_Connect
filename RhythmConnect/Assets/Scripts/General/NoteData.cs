@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ノート1個の情報を保持するクラス
+// TODO : これノーツ全部を保持するクラス作ってレーンごとに次のノーツを吐くメソッドを持たせるとかにした方がよさそう。
+/// <summary>
+/// ノート1個の情報を保持するクラス
+/// </summary>
 public class NoteData
 {
     public int Count { get; private set; }      //このノートが実際に画面で流れるタイミング

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//譜面中のBPM変化を保持するクラス
+/// <summary>
+/// 譜面中のBPM変化をノーツと同じようなタイミングデータとして保持する
+/// </summary>
 public class BpmData
 {
     public double Bpm { get; private set; }
