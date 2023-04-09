@@ -99,6 +99,11 @@ public class SongInfo
             {
                 continue;
             }
+
+            if(temp[0][0] != '#')
+            {
+                continue;
+            }
             
             string[] s;
 

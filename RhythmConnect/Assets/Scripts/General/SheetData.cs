@@ -67,13 +67,19 @@ public class SheetData
         {
             string[] temp;
 
-            if(line[0] != '#')
+            if(line != "")
             {
                 temp = myConstants.SplitParam(line, ' ');
             }
             else
             {
-                //空白行、もしくは#以外で始まる行は読み飛ばす
+                //空白行は読み飛ばす
+                continue;
+            }
+
+            if(temp[0][0] != '#')
+            {
+                //#以外で始まる行は読み飛ばす
                 continue;
             }
 
@@ -142,13 +148,19 @@ public class SheetData
         foreach(string line in Lines)
         {
             string[] temp;
-            if(line[0] != '#')
+            if(line[0] != "")
             {
                 temp = myConstants.SplitParam(line, ' ');
             }
             else
             {
-                //空白行、もしくは#以外で始まる行は読み飛ばす
+                //空白行は読み飛ばす
+                continue;
+            }
+
+            if(temp[0][0] != '#')
+            {
+                //#以外で始まる行は読み飛ばす
                 continue;
             }
 
