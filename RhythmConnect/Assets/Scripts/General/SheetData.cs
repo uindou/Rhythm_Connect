@@ -148,7 +148,7 @@ public class SheetData
         foreach(string line in Lines)
         {
             string[] temp;
-            if(line[0] != "")
+            if(line != "")
             {
                 temp = myConstants.SplitParam(line, ' ');
             }
