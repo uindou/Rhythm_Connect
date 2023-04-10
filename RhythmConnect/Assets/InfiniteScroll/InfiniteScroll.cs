@@ -10,7 +10,9 @@ public class InfiniteScroll : UIBehaviour
 	private RectTransform itemPrototype;
 
 	[SerializeField, Range(0, 30)]
-	int instantateItemCount = 9;
+
+	// TODO : 曲数に紐づけるべき
+	int instantateItemCount = 15;
 
 	[SerializeField]
 	private Direction direction;
