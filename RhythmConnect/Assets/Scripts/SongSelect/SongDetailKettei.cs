@@ -49,6 +49,8 @@ public class SongDetailKettei : UIBehaviour
         gm = go.GetComponent<GameManager>();
         Debug.Log("GameManager Load");
         songList = gm.sl.Songs;
+
+        Debug.Log(songList.Count);
     }
 
     public void UpdateItem(int count)
@@ -74,7 +76,6 @@ public class SongDetailKettei : UIBehaviour
         cursol = ringcount;
 
 
-        //count�̒l���Ȗ��Aeasy/normal/hard�̓�Փx������Aeasy,normal,hard�ɒl������@���̑����낢��
         music_name_button.text = music_name;
         easy_level_button.text = low;
         normal_level_button.text = mid;
@@ -84,7 +85,6 @@ public class SongDetailKettei : UIBehaviour
     }
     public void OnClick()
     {
-        //�Ȃ̃{�^���������ꂽ���̏����B�����̉�ʂɋȂ̏������낢��\������B
         UI_low_level.text = low;
         UI_mid_level.text = mid;
         UI_high_level.text = high;
