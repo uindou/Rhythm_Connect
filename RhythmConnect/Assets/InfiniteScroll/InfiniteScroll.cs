@@ -11,7 +11,6 @@ public class InfiniteScroll : UIBehaviour
 
 	[SerializeField, Range(0, 30)]
 
-	// TODO : 曲数に紐づけるべき
 	int instantateItemCount = 15;
 
 	[SerializeField]
