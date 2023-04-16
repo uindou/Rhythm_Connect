@@ -11,52 +11,74 @@ using TMPro;
 /// </summary>
 public class SongSelecter : MonoBehaviour {
     private GameManager gm;
-    private SongList sl;
-    private int cursol;
-    [SerializeField] private TextMeshProUGUI UI_low_level;
-    [SerializeField] private TextMeshProUGUI UI_mid_level;
-    [SerializeField] private TextMeshProUGUI UI_high_level;
-    [SerializeField] private TextMeshProUGUI UI_MusicInfo;
-    [SerializeField] private TextMeshProUGUI UI_Artist;
-    [SerializeField] private TextMeshProUGUI UI_Genre;
-    [SerializeField] private TextMeshProUGUI UI_Arranger;
-    [SerializeField] private TextMeshProUGUI UI_HighScore;
-    [SerializeField] private TextMeshProUGUI UI_MaxCombo;
-    [SerializeField] private TextMeshProUGUI UI_PlayCount;
-    [SerializeField] private TextMeshProUGUI UI_ClearRank;
-    [SerializeField] private TextMeshProUGUI UI_BPM;
-    [SerializeField] private TextMeshProUGUI UI_Notes;
+    public SongList sl { get; private set; }
+    public int cursol { get; set; }
+    public int difficult { get; set; }
+    [SerializeField] private TextMeshProUGUI uiLowDiff;
+    [SerializeField] private TextMeshProUGUI uiMidDiff;
+    [SerializeField] private TextMeshProUGUI uiHighDiff;
+    [SerializeField] private TextMeshProUGUI uiSongName;
+    [SerializeField] private TextMeshProUGUI uiArtist;
+    [SerializeField] private TextMeshProUGUI uiGenre;
+    [SerializeField] private TextMeshProUGUI uiArranger;
+    [SerializeField] private TextMeshProUGUI uiHighScore;
+    [SerializeField] private TextMeshProUGUI uiMaxCombo;
+    [SerializeField] private TextMeshProUGUI uiPlayCount;
+    [SerializeField] private TextMeshProUGUI uiClearRank;
+    [SerializeField] private TextMeshProUGUI uiDispBpm;
+    [SerializeField] private TextMeshProUGUI uiNotesNum;
     [SerializeField] private Image IMG_jacket;
 
     private void Awake() 
     {
-        gm = GameManager.Find("GameManager").GetComponent<GameManager>();
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         this.sl = gm.sl;
         cursol = 0;
+        difficult = myConstants.LowDiff;
+        uiLowDiff.color = myConstants.DiffColor[myConstants.LowDiff];
+        uiMidDiff.color = myConstants.DiffColor[myConstants.MidDiff];
+        uiHighDiff.color = myConstants.DiffColor[myConstants.HighDiff];
     }
 
     private void Update() 
     {
         SongInfo nowSong = sl.Songs[cursol];
 
-        UI_low_level.text = nowSong.PlayLevel[myConstants.LowDiff.ToString()];
-        UI_mid_level.text = nowSong.PlayLevel[myConstants.MidDiff.ToString()];
-        UI_high_level.text = nowSong.PlayLevel[myConstants.HighDiff.ToString()];
+        uiLowDiff.text = nowSong.PlayLevel[myConstants.LowDiff].ToString();
+        uiMidDiff.text = nowSong.PlayLevel[myConstants.MidDiff].ToString();
+        uiHighDiff.text = nowSong.PlayLevel[myConstants.HighDiff].ToString();
 
-        UI_MusicInfo.text = "Title:" + nowSong.SongName;
-        UI_Artist.text = "Artist:" + nowSong.Artist;
-        UI_Genre.text = "Genre:" + nowSong.Genre;
-        UI_Arranger.text = "Arranger:" + nowSong.Arranger[myConstants.LowDiff];
+        uiSongName.text = "Title:" + nowSong.SongName;
+        uiArtist.text = "Artist:" + nowSong.Artist;
+        uiGenre.text = "Genre:" + nowSong.Genre;
+        uiArranger.text = "Arranger:" + nowSong.Arranger[difficult];
 
-        UI_HighScore.text = "High Score:" + nowSong.HiScore[myConstants.LowDiff].ToString();
-        UI_MaxCombo.text = "Max Combo:" + nowSong.MaxCombo[myConstants.LowDiff].ToString();
-        UI_PlayCount.text = "Play Count:" + nowSong.PlayCount[myConstants.LowDiff].ToString();
-        UI_ClearRank.text = "Clear Rank:" + "A";
+        uiHighScore.text = "High Score:" + nowSong.HiScore[difficult].ToString();
+        uiMaxCombo.text = "Max Combo:" + nowSong.MaxCombo[difficult].ToString();
+        uiPlayCount.text = "Play Count:" + nowSong.PlayCount[difficult].ToString();
+        uiClearRank.text = "Clear Rank:" + nowSong.PlayRank[difficult];
 
-        UI_BPM.text = "BPM:" + nowSong.DispBpm;
-        UI_Notes.text = "Notes:" + nowSong.NotesNum;
+        uiDispBpm.text = "BPM:" + nowSong.DispBpm;
+        uiNotesNum.text = "Notes:" + nowSong.NotesNum[difficult].ToString();
 
         Texture2D tex = readByBinary(readPngFile(
             myConstants.SongDataFolderPath + "\\" + myConstants.ModeString[nowSong.Mode] + "\\" + nowSong.SongName + "\\" + "Jacket.jpg"));
+        IMG_jacket.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero); 
+    }
+    public byte[] readPngFile(string path)
+    {
+        using (FileStream fileStream = new FileStream (path, FileMode.Open, FileAccess.Read)) {
+            BinaryReader bin = new BinaryReader (fileStream);
+            byte[] values = bin.ReadBytes ((int)bin.BaseStream.Length);
+            bin.Close ();
+            return values;
+        }
+    }
+
+    public Texture2D readByBinary(byte[] bytes)
+    {
+        Texture2D texture = new Texture2D (1, 1);
+        texture.LoadImage (bytes);
+        return texture;
     }
 }

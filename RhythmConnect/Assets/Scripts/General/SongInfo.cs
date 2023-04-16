@@ -24,6 +24,7 @@ public class SongInfo
     public int[] MaxCombo { get; private set; } = new int[myConstants.DiffKindNum];
     //譜面で過去に出したことのある最大コンボ数（難易度ごとに）
     public int[] PlayCount { get; private set; } = new int[myConstants.DiffKindNum];
+    public string[] PlayRank {get; private set; } = new string[myConstants.DiffKindNum];
     //譜面をプレイした回数（難易度ごとに）
 
     public SongInfo()
@@ -49,6 +50,9 @@ public class SongInfo
         PlayCount[myConstants.LowDiff] = 0;
         PlayCount[myConstants.MidDiff] = 0;
         PlayCount[myConstants.HighDiff] = 0;
+        PlayRank[myConstants.LowDiff] = "F";
+        PlayRank[myConstants.MidDiff] = "F";
+        PlayRank[myConstants.HighDiff] = "F";
     }
 
     /// <summary>
@@ -76,6 +80,10 @@ public class SongInfo
         {
             ReadInfoParam(Lines);
         }
+
+        PlayRank[myConstants.LowDiff] = myConstants.CalcRank(HiScore[myConstants.LowDiff]);
+        PlayRank[myConstants.MidDiff] = myConstants.CalcRank(HiScore[myConstants.MidDiff]);
+        PlayRank[myConstants.HighDiff] = myConstants.CalcRank(HiScore[myConstants.HighDiff]);
         
         return true;
     }
@@ -186,8 +194,6 @@ public class SongInfo
     public bool CreateSongInfoFile()
     {
         Debug.Log("Start CreateSongInfoFile " + SongName);
-
-        SheetData sd = new SheetData();
         
         List<string> Lines = new List<string>();
         
@@ -205,6 +211,7 @@ public class SongInfo
         //ノーツ数を得るために譜面データも読み込む
         for(int i = 0; i < myConstants.DiffKindNum; i++)
         {
+            SheetData sd = new SheetData();
             sd.LoadSheetData(SongName, Mode, i);
             NotesNum[i] = sd.NotesNum;
         }
