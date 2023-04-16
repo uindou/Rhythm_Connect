@@ -7,10 +7,10 @@ using TMPro;
 
 public class SongDetailKettei : UIBehaviour
 {
-    [SerializeField] TextMeshProUGUI music_name_button;
-    [SerializeField] TextMeshProUGUI easy_level_button;
-    [SerializeField] TextMeshProUGUI normal_level_button;
-    [SerializeField] TextMeshProUGUI hard_level_button;
+    [SerializeField] TextMeshProUGUI music_name_text;
+    [SerializeField] TextMeshProUGUI easy_level_text;
+    [SerializeField] TextMeshProUGUI normal_level_text;
+    [SerializeField] TextMeshProUGUI hard_level_text;
 
     [SerializeField] TextMeshProUGUI UI_low_level;
     [SerializeField] TextMeshProUGUI UI_mid_level;
@@ -76,10 +76,10 @@ public class SongDetailKettei : UIBehaviour
         cursol = ringcount;
 
 
-        music_name_button.text = music_name;
-        easy_level_button.text = low;
-        normal_level_button.text = mid;
-        hard_level_button.text = high;
+        music_name_text.text = music_name;
+        easy_level_text.text = low;
+        normal_level_text.text = mid;
+        hard_level_text.text = high;
 
 
     }
