@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//小節線データ
+/// <summary>
+/// 小節線データ
+/// </summary>
 public class BarData
 {
     public double Rate { get; set; }    //譜面に定義されている小節長倍率

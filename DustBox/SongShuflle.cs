@@ -4,6 +4,10 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+/// <summary>
+/// 現在不使用
+/// チュウニズムタイプの曲選択用スクリプト
+/// </summary>
 public class SongShuflle : MonoBehaviour
 {
     private List<SongData> SongDatas;

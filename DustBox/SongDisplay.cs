@@ -34,7 +34,7 @@ public class SongDisplay : MonoBehaviour
         for(int i = 0; i < song_num; i++)
         {
             //GameObject gobj = Instantiate(song_button_prefab);
-            //gobj.‚È‚ñ‚Æ‚© = ‚È‚ñ‚Æ‚©@‚ð‚±‚±‚Å‚â‚Á‚Æ‚­
+            //gobj.ãªã‚“ã¨ã‹ = ãªã‚“ã¨ã‹ã€€ã‚’ã“ã“ã§ã‚„ã£ã¨ã
             //song_datas.Add(gobj);
         }
     }
