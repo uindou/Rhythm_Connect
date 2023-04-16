@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class SongList
 {
+    // TODO : 曲リストのソートはこのクラスに任せたいね
+    // TODO : 曲リストはモードごとに持ったらいいじゃん、配列とか使ってさ
     public List<SongInfo> Songs { get; private set; } = new List<SongInfo>();
     //曲情報のリスト
 

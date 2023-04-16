@@ -56,6 +56,16 @@ static class myConstants
     public static readonly int MidDiff = 1;
     public static readonly int HighDiff = 2;
     public static readonly int DiffKindNum = 3;
+    public static readonly Color[] DiffColor =new Color[] {Color.green, Color.yellow, Color.red};
+
+    //スコアランク
+    public static readonly int BorderFullScore = 1000000;
+    public static readonly int BorderSSS = 980000;
+    public static readonly int BorderSS = 950000;
+    public static readonly int BorderS = 900000;
+    public static readonly int BorderA = 850000;
+    public static readonly int BorderB = 800000;
+    public static readonly int BorderC = 700000;
 
     //設定ファイルなどのファイル名/フォルダパス
     public static readonly string GameConfigFilePath = @"config\gameconfig.rccfg";
@@ -143,5 +153,21 @@ static class myConstants
         rtn[1] = source.Substring(source.IndexOf(splitter) + 1);
 
         return rtn;
+    }
+    
+    public static string CalcRank(int score)
+    {
+        string rank;
+
+        if      (score >= BorderFullScore)  rank = "PERFECT";
+        else if (score >= BorderSSS)        rank = "SSS";
+        else if (score >= BorderSS)         rank = "SS";
+        else if (score >= BorderS)          rank = "S";
+        else if (score >= BorderA)          rank = "A";
+        else if (score >= BorderB)          rank = "B";
+        else if (score >= BorderC)          rank = "C";
+        else                                rank = "D";
+
+        return rank;
     }
 }

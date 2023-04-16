@@ -17,7 +17,7 @@ public class ItemControllerLoop : UIBehaviour, IInfiniteScrollSetup
 	{
 		if(isSetuped == true) return;
 
-		var item = obj.GetComponentInChildren<SongDetailKettei>();
-		item.UpdateItem(itemCount+1);
+		var item = obj.GetComponentInChildren<SongButton>();
+		item.UpdateItem(itemCount);
 	}
 }
