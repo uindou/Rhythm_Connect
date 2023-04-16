@@ -10,12 +10,12 @@ public class NotifyController : MonoBehaviour
     private static readonly float intervalTime = 2.5f;      /* フルで表示されてる時間 */
     private static readonly float fadeTime = 0.7f;          /* さよならするのにかかる時間 */
 
-    [SerializeField]
-    private CanvasGroup canGr;
-    private Sequence seq;
+
+    [SerializeField] private CanvasGroup canGr;
+    [SerializeField] private Sequence seq;
 
     void Update(){
-        /* m押したら出る4 */
+        /* space押したら出る4 */
         if (Input.GetKeyDown(KeyCode.Space)){
             PlayNotification();
         }
