@@ -11,9 +11,12 @@ using TMPro;
 /// </summary>
 public class SongSelecter : MonoBehaviour {
     private GameManager gm;
-    public SongList sl { get; private set; }
-    public int cursol { get; set; }
-    public int difficult { get; set; }
+    public SongList sl { get; private set; }  //現在のフォルダの全曲リスト
+    public int cursol { get; set; }  //現在選択されている曲のインデックス
+    public int difficult { get; set; }  //現在選択されている難易度
+
+    //外の各コンポーネントをアタッチする用の変数。
+    //Unity側でアタッチする必要があるので注意
     [SerializeField] private TextMeshProUGUI uiLowDiff;
     [SerializeField] private TextMeshProUGUI uiMidDiff;
     [SerializeField] private TextMeshProUGUI uiHighDiff;
@@ -65,6 +68,13 @@ public class SongSelecter : MonoBehaviour {
             myConstants.SongDataFolderPath + "\\" + myConstants.ModeString[nowSong.Mode] + "\\" + nowSong.SongName + "\\" + "Jacket.jpg"));
         IMG_jacket.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero); 
     }
+
+    /// <summary>
+    /// 画像を読んでくるための奴
+    /// Png用っぽい。
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
     public byte[] readPngFile(string path)
     {
         using (FileStream fileStream = new FileStream (path, FileMode.Open, FileAccess.Read)) {
@@ -75,6 +85,11 @@ public class SongSelecter : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// バイナリで取ってきた画像データを読むメソッドぽい
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
     public Texture2D readByBinary(byte[] bytes)
     {
         Texture2D texture = new Texture2D (1, 1);
