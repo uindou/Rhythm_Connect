@@ -9,7 +9,7 @@ using UnityEngine;
 public class SongInfo
 {
     public string SongName { get; private set; }    //楽曲名
-    public int Mode { get; private set; }        //公式フォルダorユーザー定義フォルダ
+    public string Path { get; private set; }        //データのパス
     public string Genre { get; private set; }       //ジャンル名
     public string Artist { get; private set; }      //作曲者名
     public string DispBpm { get; private set; }     //プレビューで表示するBPM文字列（ソフラン含む）
@@ -58,18 +58,18 @@ public class SongInfo
     /// <summary>
     /// 曲情報ファイルの読み込み 成否をBool値で返す（成功でTrue）
     /// </summary>
-    /// <param name="songname"></param>
+    /// <param name="songpath"></param>
     /// <param name="mode"></param>
     /// <returns>成否（成功でTrue）</returns>
-    public bool LoadSongInfo(string songname, int mode)
+    public bool LoadSongInfo(string songpath)
     {
-        SongName = songname;
-        Mode = mode;
+        Path = songpath;
+        SongName = Path.Split('\\')[Path.Split('\\').Length - 1];;
 
-        Debug.Log("Loading " + SongName);
+        Debug.Log("Loading " + Path);
 
         List<string> Lines = new List<string>();
-        Lines = myConstants.LoadFileToList(myConstants.SongInfoFolderPath + '\\' + myConstants.ModeString[Mode] + '\\' + SongName + ".rcdat");
+        Lines = myConstants.LoadFileToList(Path + ".rcdat");
         //ex. songinfo\rc\songname.rcdat
         if(Lines == null)
         {
@@ -193,12 +193,12 @@ public class SongInfo
     /// <returns>成否（成功でTrue）</returns>
     public bool CreateSongInfoFile()
     {
-        Debug.Log("Start CreateSongInfoFile " + SongName);
+        Debug.Log("Start CreateSongInfoFile " + Path);
         
         List<string> Lines = new List<string>();
         
         //楽曲パッケージは譜面データ以外に作曲者情報などを記載したInfoファイルを持つ
-        Lines = myConstants.LoadFileToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[Mode] + '\\' + SongName + '\\' + "Info.rcdat");
+        Lines = myConstants.LoadFileToList(Path + '\\' + "Info.rcdat");
         //ex. songdata\mode\songname\Info.rcdat
 
         if(Lines == null)
@@ -212,7 +212,7 @@ public class SongInfo
         for(int i = 0; i < myConstants.DiffKindNum; i++)
         {
             SheetData sd = new SheetData();
-            sd.LoadSheetData(SongName, Mode, i);
+            sd.LoadSheetData(Path, i);
             NotesNum[i] = sd.NotesNum;
         }
 

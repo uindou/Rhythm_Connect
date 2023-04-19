@@ -40,10 +40,10 @@ public class SheetData
     /// <param name="mode">公式orユーザー定義譜面</param>
     /// <param name="diff">難易度</param>
     /// <returns>成否（成功でTrue）</returns>
-    public bool LoadSheetData(string songname, int mode, int diff)
+    public bool LoadSheetData(string songpath, int diff)
     {
         List<string> Lines = new List<string>();
-        Lines = myConstants.LoadFileToList(myConstants.SongDataFolderPath + '\\' + myConstants.ModeString[mode] + '\\' + songname + "\\sheet\\" + myConstants.DiffName[diff] + ".rcsht");
+        Lines = myConstants.LoadFileToList(songpath + "\\sheet\\" + myConstants.DiffName[diff] + ".rcsht");
         if(Lines == null)
         {
             return false;

@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameConfig gc { get; private set; } = new GameConfig();
     public SystemConfig sc { get; private set; } = new SystemConfig();
-    public SongList sl { get; private set; } = new SongList();
+    public string deliver { get; set; }
 
     void Awake()
     {
