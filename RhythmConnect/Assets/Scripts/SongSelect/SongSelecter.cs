@@ -11,7 +11,7 @@ using TMPro;
 /// </summary>
 public class SongSelecter : MonoBehaviour {
     private GameManager gm;
-    public SongList sl { get; private set; }  //現在のフォルダの全曲リスト
+    public FolderInfo sl { get; private set; }  //現在のフォルダの全曲リスト
     public int cursol { get; set; }  //現在選択されている曲のインデックス
     public int difficult { get; set; }  //現在選択されている難易度
 
@@ -34,8 +34,6 @@ public class SongSelecter : MonoBehaviour {
 
     private void Awake() 
     {
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        this.sl = gm.sl;
         cursol = 0;
         difficult = myConstants.LowDiff;
         uiLowDiff.color = myConstants.DiffColor[myConstants.LowDiff];
@@ -65,7 +63,7 @@ public class SongSelecter : MonoBehaviour {
         uiNotesNum.text = "Notes:" + nowSong.NotesNum[difficult].ToString();
 
         Texture2D tex = readByBinary(readPngFile(
-            myConstants.SongDataFolderPath + "\\" + myConstants.ModeString[nowSong.Mode] + "\\" + nowSong.SongName + "\\" + "Jacket.jpg"));
+            nowSong.Path + "\\" + "Jacket.jpg"));
         IMG_jacket.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero); 
     }
 

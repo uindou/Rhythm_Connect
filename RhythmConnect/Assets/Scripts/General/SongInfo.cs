@@ -31,7 +31,6 @@ public class SongInfo
     {
         //初期化
         SongName = "TestSong";
-        Mode = myConstants.Rc;
         Genre = "TestSong";
         Artist = "TestMan";
         DispBpm = "180";
@@ -65,8 +64,6 @@ public class SongInfo
     {
         Path = songpath;
         SongName = Path.Split('\\')[Path.Split('\\').Length - 1];;
-
-        Debug.Log("Loading " + Path);
 
         List<string> Lines = new List<string>();
         Lines = myConstants.LoadFileToList(Path + ".rcdat");
@@ -183,7 +180,6 @@ public class SongInfo
                     break;
             }
         }
-        Debug.Log(SongName + " " + Artist);
         return true;
     }
 
@@ -193,8 +189,6 @@ public class SongInfo
     /// <returns>成否（成功でTrue）</returns>
     public bool CreateSongInfoFile()
     {
-        Debug.Log("Start CreateSongInfoFile " + Path);
-        
         List<string> Lines = new List<string>();
         
         //楽曲パッケージは譜面データ以外に作曲者情報などを記載したInfoファイルを持つ

@@ -75,6 +75,10 @@ static class myConstants
     public static readonly int Rc = 0;
     public static readonly int User = 1;
     public static readonly string[] ModeString = new string[] { "rc", "user" };
+
+    //色関連
+    public static readonly Color ButtonFocus = Color.cyan;
+    public static readonly Color ButtonDefault = Color.white;
     
 
     //以下コンビニ関数

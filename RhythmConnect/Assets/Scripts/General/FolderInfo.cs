@@ -8,36 +8,62 @@ using UnityEngine;
 public class FolderInfo
 {
     // TODO : 曲リストのソートはこのクラスに任せたいね
-    public List<SongInfo> Songs { get; private set; } = new List<SongInfo>();
-    //曲情報のリスト
+    public string name { get; private set; }
+    public string path { get; private set; }
+    public bool isLoaded { get; private set; }
+    public List<SongInfo> Songs { get; private set; } = new List<SongInfo>();   //曲情報のリスト
+    public FolderInfo(string folderpath)
+    {
+        this.name = TrimFolderPath(folderpath);
+        this.path = folderpath;
+    }
 
     /// <summary>
     /// フォルダの曲情報を全て読み込む
     /// </summary>
     /// <returns>成否（成功でTrue）</returns>
-    public bool LoadSongList(string folderpath)
+    public bool LoadSongList()
     {
-        List<string> songnames = new List<string>();
-        
-        songnames = myConstants.LoadSubFolderToList(folderpath);
-        if(songnames == null)
+        // 既に読込済みならスキップ
+        if(this.isLoaded)
         {
-            continue;
+            return true;
         }
 
-        foreach(string songname in songnames)
+        List<string> songpaths = new List<string>();
+        
+        songpaths = myConstants.LoadSubFolderToList(this.path);
+        if(songpaths == null)
+        {
+            return false;
+        }
+
+        List<SongInfo> list = new List<SongInfo>();
+        foreach(string songpath in songpaths)
         {
             SongInfo temp = new SongInfo();
-            string str;
-            str = songname.Split('\\')[songname.Split('\\').Length - 1];
-            Debug.Log("LoadSongInfo from " + str);
-            if(temp.LoadSongInfo(Path) == false)
+            if(temp.LoadSongInfo(songpath) == false)
             {
                 continue;
             }
-            Songs.Add(temp);
+            list.Add(temp);
         }
+        this.Songs = list;
+        this.isLoaded = true;
 
         return true;
+    }
+
+    /// <summary>
+    /// 引数に受け取ったフォルダパスから末尾のフォルダ名だけを切り出す。
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    private string TrimFolderPath(string path)
+    {
+        string[] foldernames = path.Split('\\');
+        string endfoldername = foldernames[foldernames.Length - 1];
+
+        return endfoldername;
     }
 }
