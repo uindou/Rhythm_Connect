@@ -26,6 +26,7 @@ public class FreePlayUI : MonoBehaviour
     private List<SongInfo> Songs = new List<SongInfo>();
     private Phase NowPhase = Phase.folder;
     private List<GameObject> buttons = new List<GameObject>();
+    public int Difficult { get; set; }
     private int _Cursol;
 
     public int Cursol
@@ -34,36 +35,65 @@ public class FreePlayUI : MonoBehaviour
         set
         {
             //カーソルが向いているボタンの色を変えるための処理。
-            buttons[_Cursol].GetComponent<Button>().image.color = ButtonDefault;
-            _Cursol = value;
+            if(buttons.Count > _Cursol)
+            {
+                buttons[_Cursol].GetComponent<Button>().image.color = ButtonDefault;
+            }
+            
+            if(buttons.Count > value)
+            {
+                _Cursol = value;
+            }
+            else
+            {
+                _Cursol = 0;
+            }
+            
             buttons[_Cursol].GetComponent<Button>().image.color = ButtonFocus;
-
         }
     }
 
     private GameObject ButtonCancel;    //非活性にするとFindで見つからなくなるのでオブジェクトをつかんでおく。
     private GameObject Content;     //スクロールビューの表示要素
     private GameObject ButtonPrefab;    //ボタン生成用のテンプレート
-    private GameObject LowDiff;
-    private GameObject MidDiff;
-    private GameObject HighDiff;
-    private GameObject SongTitle;
-    private GameObject Artist;
-    private GameObject Genre;
-    private GameObject Arranger;
-    private GameObject HighScore;
-    private GameObject MaxCombo;
-    private GameObject PlayCount;
-    private GameObject ClearRank;
-    private GameObject DispBpm;
-    private GameObject NotesNum;
-    private Image IMG_jacket;
+    private GameObject FolderDesc;
+    private GameObject SongDesc;
+
+    //フォルダ詳細オブジェクト
+    private TextMeshProUGUI FolderTitle;
+    private TextMeshProUGUI SongsNum;
+    private TextMeshProUGUI RankSSSNum;
+    private TextMeshProUGUI RankSSNum;
+    private TextMeshProUGUI RankSNum;
+    private TextMeshProUGUI RankPNum;
+    private TextMeshProUGUI FCNum;
+    private TextMeshProUGUI FolderText;
+    private Image FolderJacket;
+
+    //曲詳細オブジェクト
+    private TextMeshProUGUI LevelLowDiff;
+    private TextMeshProUGUI LevelMidDiff;
+    private TextMeshProUGUI LevelHighDiff;
+    private TextMeshProUGUI SongTitle;
+    private TextMeshProUGUI Artist;
+    private TextMeshProUGUI Genre;
+    private TextMeshProUGUI Arranger;
+    private TextMeshProUGUI HighScore;
+    private TextMeshProUGUI MaxCombo;
+    private TextMeshProUGUI PlayCount;
+    private TextMeshProUGUI ClearRank;
+    private TextMeshProUGUI DispBpm;
+    private TextMeshProUGUI NotesNum;
+    private Image SongJacket;
 
 #endregion
 
 #region "Unity標準メソッド"
     private void Awake()
     {
+        //変数の初期化
+        Difficult = myConstants.LowDiff;
+
         //フォルダ一覧のロード
         string fp = SongDataFolderPath + '\\' + ModeString[Rc];
         if(LoadFolderList(fp) == false)
@@ -72,22 +102,39 @@ public class FreePlayUI : MonoBehaviour
         }
 
         //各種Unityオブジェクトの読込
+        //UIパーツ
         Content = GameObject.Find("Content");
         ButtonPrefab = (GameObject)Resources.Load("Prefabs/Button");
         ButtonCancel = GameObject.Find("ButtonCancel");
-        SongTitle = GameObject.Find("Title");
-        Artist = GameObject.Find("Artist");
-        Genre = GameObject.Find("Genre");
-        Arranger = GameObject.Find("Arranger");
-        HighScore = GameObject.Find("HighScore");
-        MaxCombo = GameObject.Find("MaxCombo");
-        PlayCount = GameObject.Find("PlayCount");
-        ClearRank = GameObject.Find("ClearRank");
-        DispBpm = GameObject.Find("BPM");
-        NotesNum = GameObject.Find("Notes");
-        LowDiff = GameObject.Find("buttonLowDiff");
-        MidDiff = GameObject.Find("buttonMidDiff");
-        HighDiff = GameObject.Find("buttonHighDiff");
+        FolderDesc = GameObject.Find("Folder Description");
+        SongDesc = GameObject.Find("Song Description");
+
+        //フォルダ情報オブジェクト
+        FolderTitle = GameObject.Find("FolderTitle").GetComponent<TextMeshProUGUI>();
+        SongsNum = GameObject.Find("SongsNum").GetComponent<TextMeshProUGUI>();
+        RankSSSNum = GameObject.Find("RankSSSNum").GetComponent<TextMeshProUGUI>();
+        RankSSNum = GameObject.Find("RankSSNum").GetComponent<TextMeshProUGUI>();
+        RankSNum = GameObject.Find("RankSNum").GetComponent<TextMeshProUGUI>();
+        RankPNum = GameObject.Find("RankPNum").GetComponent<TextMeshProUGUI>();
+        FCNum = GameObject.Find("FCNum").GetComponent<TextMeshProUGUI>();
+        FolderText = GameObject.Find("FolderText").GetComponent<TextMeshProUGUI>();
+        FolderJacket = GameObject.Find("FolderJacket").GetComponent<Image>();
+
+        //曲情報オブジェクト
+        SongTitle = GameObject.Find("Title").GetComponent<TextMeshProUGUI>();
+        Artist = GameObject.Find("Artist").GetComponent<TextMeshProUGUI>();
+        Genre = GameObject.Find("Genre").GetComponent<TextMeshProUGUI>();
+        Arranger = GameObject.Find("Arranger").GetComponent<TextMeshProUGUI>();
+        HighScore = GameObject.Find("HighScore").GetComponent<TextMeshProUGUI>();
+        MaxCombo = GameObject.Find("MaxCombo").GetComponent<TextMeshProUGUI>();
+        PlayCount = GameObject.Find("PlayCount").GetComponent<TextMeshProUGUI>();
+        ClearRank = GameObject.Find("ClearRank").GetComponent<TextMeshProUGUI>();
+        DispBpm = GameObject.Find("BPM").GetComponent<TextMeshProUGUI>();
+        NotesNum = GameObject.Find("Notes").GetComponent<TextMeshProUGUI>();
+        LevelLowDiff = GameObject.Find("textLowDiff").GetComponent<TextMeshProUGUI>();
+        LevelMidDiff = GameObject.Find("textMidDiff").GetComponent<TextMeshProUGUI>();
+        LevelHighDiff = GameObject.Find("textHighDiff").GetComponent<TextMeshProUGUI>();
+        SongJacket = GameObject.Find("SongJacket").GetComponent<Image>();
     }
 
     private void Start()
@@ -103,10 +150,28 @@ public class FreePlayUI : MonoBehaviour
         switch(NowPhase)
         {
             case Phase.folder:
+                FolderInfo nowFolder = Folders[Cursol];
+                SongTitle.text = nowFolder.name;
                 break;
 
             case Phase.song:
                 SongInfo nowSong = this.Songs[Cursol];
+                LevelLowDiff.text = nowSong.PlayLevel[LowDiff].ToString();
+                LevelMidDiff.text = nowSong.PlayLevel[MidDiff].ToString();
+                LevelHighDiff.text = nowSong.PlayLevel[HighDiff].ToString();
+                SongTitle.text = "Title:" + nowSong.SongName;
+                Artist.text = "Artist:" + nowSong.Artist;
+                Genre.text = "Genre:" + nowSong.Genre;
+                Arranger.text = "Arranger:" + nowSong.Arranger[Difficult];
+                HighScore.text = "High Score:" + nowSong.HiScore[Difficult].ToString();
+                MaxCombo.text = "Max Combo:" + nowSong.MaxCombo[Difficult].ToString();
+                PlayCount.text = "Play Count:" + nowSong.PlayCount[Difficult].ToString();
+                ClearRank.text = "Clear Rank:" + nowSong.PlayRank[Difficult];
+                DispBpm.text = "BPM:" + nowSong.DispBpm;
+                NotesNum.text = "Notes:" + nowSong.NotesNum[Difficult].ToString();
+
+                Texture2D tex = readByBinary(readPngFile(nowSong.Path + "\\" + "Jacket.jpg"));     
+                SongJacket.sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), Vector2.zero);
                 break;
         }
     }
@@ -152,7 +217,6 @@ public class FreePlayUI : MonoBehaviour
             
             case Phase.song:
                 this.SetViewFromFolders();
-                NowPhase = Phase.folder;
                 break;
         }
 
@@ -241,6 +305,8 @@ public class FreePlayUI : MonoBehaviour
         ButtonCancel.SetActive(true);
         Cursol = 0;
         NowPhase = Phase.song;
+        FolderDesc.SetActive(false);
+        SongDesc.SetActive(true);
 
         return true;
     }
@@ -262,6 +328,10 @@ public class FreePlayUI : MonoBehaviour
         
         //フォルダ一覧表示時はCancelボタンは使わないので消す
         ButtonCancel.SetActive(false);
+        FolderDesc.SetActive(true);
+        SongDesc.SetActive(false);
+        NowPhase = Phase.folder;
+        Cursol = 0;
 
         return true;
     }
@@ -281,6 +351,34 @@ public class FreePlayUI : MonoBehaviour
         }
 
         buttons.Clear();
+    }
+
+    /// <summary>
+    /// 画像を読んでくるための奴
+    /// Png用っぽい。
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public byte[] readPngFile(string path)
+    {
+        using (FileStream fileStream = new FileStream (path, FileMode.Open, FileAccess.Read)) {
+            BinaryReader bin = new BinaryReader (fileStream);
+            byte[] values = bin.ReadBytes ((int)bin.BaseStream.Length);
+            bin.Close ();
+            return values;
+        }
+    }
+
+    /// <summary>
+    /// バイナリで取ってきた画像データを読むメソッドぽい
+    /// </summary>
+    /// <param name="path"></param>
+    /// <returns></returns>
+    public Texture2D readByBinary(byte[] bytes)
+    {
+        Texture2D texture = new Texture2D (1, 1);
+        texture.LoadImage (bytes);
+        return texture;
     }
 
 #endregion
