@@ -18,18 +18,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Config.unity
     guid: 2e422637515249446ac5d333c70eef2a
   - enabled: 1
-    path: Assets/Scenes/FreePlay_proto.unity
-    guid: 9db4145a97e9f0940b183b53bbc3d6bf
-  - enabled: 1
     path: Assets/Scenes/SongSelect.unity
     guid: 8217b167fec1d0449962b778733b1c48
   - enabled: 1
     path: Assets/Scenes/GameSetting.unity
     guid: 29913d7e06c2dcb43bfaf5f4549812db
   - enabled: 1
-    path: Assets/Scenes/SongSelect.unity
-    guid: 4368a957295b5bc4fbbe8b433abfb0c5
-  - enabled: 1
     path: Assets/Scenes/GamePlay.unity
     guid: 25f1e93db2681df43b91517ca5ba1d51
+  - enabled: 1
+    path: Assets/Scenes/FreePlay.unity
+    guid: 1dde54ece7ccb7045b9002e66f8bce9c
+  - enabled: 1
+    path: Assets/Scenes/PlayReady.unity
+    guid: 4e7fd6124e615e14aa494ca9e7c63fd5
   m_configObjects: {}

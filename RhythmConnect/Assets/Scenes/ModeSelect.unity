@@ -1104,4 +1104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a54a66230fb8d4a9d991a417a2839e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: FreePlay_proto
+  scene: FreePlay
