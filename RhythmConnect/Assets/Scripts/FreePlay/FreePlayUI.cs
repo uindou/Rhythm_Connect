@@ -12,7 +12,7 @@ using TMPro;
 enum Phase
 {
     folder
-    ,song
+    , song
 }
 
 /// <summary>
