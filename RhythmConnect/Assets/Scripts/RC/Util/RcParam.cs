@@ -1,4 +1,7 @@
 
+using System.Collections.Generic;
+using RC.Const;
+
 namespace RC.Util
 {
     class RcParam
@@ -25,6 +28,30 @@ namespace RC.Util
 
             rtn[0] = source.Substring(0, source.IndexOf(splitter));
             rtn[1] = source.Substring(source.IndexOf(splitter) + 1);
+
+            return rtn;
+        }
+
+        public static Dictionary<string, object> ReadDataParam(string source)
+        {
+            Dictionary<string, object> rtn = new Dictionary<string, object>();
+
+            if (string.IsNullOrEmpty(source)) return null;
+            if (source[0] != '#') return null;
+
+            string[] temp = source.Split(' ');
+
+            int? barNum = RcExtension.IntTryParse(temp[0].Substring(1, 3));
+            if (barNum == null) return null;
+            rtn.Add("barNum", barNum);
+            
+            int? ch = RcExtension.IntTryParse(temp[0].Substring(4, 2));
+            if (ch == null) return null;
+            rtn.Add("channel", (Channels)ch);
+
+            string data = temp[1];
+            if (string.IsNullOrEmpty(data)) return null;
+            rtn.Add("data", data);
 
             return rtn;
         }
