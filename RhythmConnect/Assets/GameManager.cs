@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameConfig gc { get; private set; } = new GameConfig();
     public SystemConfig sc { get; private set; } = new SystemConfig();
-    public SongList sl { get; private set; } = new SongList();
+    public string deliver { get; set; }
 
     void Awake()
     {
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     {
         gc.LoadGameConfig(myConstants.GameConfigFilePath);
         sc.LoadSystemConfig(myConstants.SystemConfigFilePath);
-        sl.LoadSongList();
+        //sl.LoadSongList();
 
         //Debug.Log(gc.GaugeMode);
         //Debug.Log(sc.KeyConfig[0]);
@@ -28,6 +28,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

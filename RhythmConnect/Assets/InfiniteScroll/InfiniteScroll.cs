@@ -10,7 +10,8 @@ public class InfiniteScroll : UIBehaviour
 	private RectTransform itemPrototype;
 
 	[SerializeField, Range(0, 30)]
-	int instantateItemCount = 9;
+
+	int instantateItemCount = 15;
 
 	[SerializeField]
 	private Direction direction;

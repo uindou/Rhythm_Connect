@@ -5,11 +5,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// クラスを跨いで使う定数、関数
+/// 追加の際はstatic指定を忘れずに
+/// </summary>
 static class myConstants
 {
     //1小節の解像度
     public static readonly int BarResolution = 9600;
-    public static readonly int MaxBarNum = 1000;
+
+    //読み込める最大の小節数
+    //一般的なゲーム尺の曲は80前後で落ち着くと思われる
+    public static readonly int MaxBarNum = 300;
 
     //各チャンネル分類用定数
     public static readonly int Channel_LaneA = 0;
@@ -22,7 +29,13 @@ static class myConstants
     public static readonly int Channel_LaneABC = 7;
     public static readonly int Channel_LaneBCD = 8;
     public static readonly int Channel_LaneABCD = 9;
+    /// <summary>
+    /// BPM変更データ用チャンネル
+    /// </summary>
     public static readonly int Channel_ChangeBpm = 10;
+    /// <summary>
+    /// 小節倍率変更データ用チャンネル
+    /// </summary>
     public static readonly int Channel_ChangeBarRate = 11;
     public static readonly int LaneNum = 10;
 
@@ -31,7 +44,7 @@ static class myConstants
     public static readonly int LongNoteStart = 2;
     public static readonly int LongNoteEnd = 3;
 
-    //ゲージモード対数値
+    //ゲージモード定数
     public static readonly int Easy = 0;
     public static readonly int Normal = 1;
     public static readonly int Hard = 2;
@@ -43,6 +56,16 @@ static class myConstants
     public static readonly int MidDiff = 1;
     public static readonly int HighDiff = 2;
     public static readonly int DiffKindNum = 3;
+    public static readonly Color[] DiffColor =new Color[] {Color.green, Color.yellow, Color.red};
+
+    //スコアランク
+    public static readonly int BorderFullScore = 1000000;
+    public static readonly int BorderSSS = 980000;
+    public static readonly int BorderSS = 950000;
+    public static readonly int BorderS = 900000;
+    public static readonly int BorderA = 850000;
+    public static readonly int BorderB = 800000;
+    public static readonly int BorderC = 700000;
 
     //設定ファイルなどのファイル名/フォルダパス
     public static readonly string GameConfigFilePath = @"config\gameconfig.rccfg";
@@ -52,13 +75,19 @@ static class myConstants
     public static readonly int Rc = 0;
     public static readonly int User = 1;
     public static readonly string[] ModeString = new string[] { "rc", "user" };
+
+    //色関連
+    public static readonly Color ButtonFocus = Color.cyan;
+    public static readonly Color ButtonDefault = Color.white;
     
 
     //以下コンビニ関数
 
-    //LoadFileToList
-    //引数で受け取ったテキストファイルの内容を一行ずつListに読み込み、返す。
-    //ファイルが見つからなかった場合はnullを返す。
+    /// <summary>
+    /// 引数で受け取ったテキストファイルの内容を一行ずつListに読み込む。
+    /// </summary>
+    /// <param name="filename"></param>
+    /// <returns>テキストファイルの中身（ファイルがなければnull）</returns>
     public static List<string> LoadFileToList(string filename)
     {
         List<string> Lines = new List<string>();
@@ -84,9 +113,11 @@ static class myConstants
         return Lines;
     }
 
-    //LoadSubFolderToList
-    //指定したフォルダのサブフォルダ一覧をListで返す。
-    //フォルダが見つからなかった場合はnullを返す。
+    /// <summary>
+    /// 指定したフォルダのサブフォルダ一覧をListで返す。
+    /// </summary>
+    /// <param name="folderpath"></param>
+    /// <returns>サブフォルダ一覧（フォルダがなければnull）</returns>
     public static List<string> LoadSubFolderToList(string folderpath)
     {
         List<string> Folders = new List<string>();
@@ -110,11 +141,14 @@ static class myConstants
         return Folders;
     }
 
-
-    //SplitParam
-    //Splitメソッドのマイナーチェンジ
-    //source内で初めて登場したsplitterの位置でsourceを二分する
-    //返り値はSplitメソッドと同様
+    // TODO : これもうちょい拡張してその行がパラメータorデータ行になってるかを判断させたい
+    /// <summary>
+    /// パラメータ分解用のSplit
+    /// source内で初めて登場したsplitterの位置でsourceを二分する
+    /// </summary>
+    /// <param name="source">対象文字列</param>
+    /// <param name="splitter">区切り文字</param>
+    /// <returns>Splitメソッドと同様</returns>
     public static string[] SplitParam(string source,char splitter)
     {
         string[] rtn = new string[2];
@@ -123,5 +157,21 @@ static class myConstants
         rtn[1] = source.Substring(source.IndexOf(splitter) + 1);
 
         return rtn;
+    }
+    
+    public static string CalcRank(int score)
+    {
+        string rank;
+
+        if      (score >= BorderFullScore)  rank = "PERFECT";
+        else if (score >= BorderSSS)        rank = "SSS";
+        else if (score >= BorderSS)         rank = "SS";
+        else if (score >= BorderS)          rank = "S";
+        else if (score >= BorderA)          rank = "A";
+        else if (score >= BorderB)          rank = "B";
+        else if (score >= BorderC)          rank = "C";
+        else                                rank = "D";
+
+        return rank;
     }
 }
