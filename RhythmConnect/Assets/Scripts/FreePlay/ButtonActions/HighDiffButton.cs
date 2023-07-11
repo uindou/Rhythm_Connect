@@ -1,14 +1,16 @@
 using UnityEngine;
+using RC.Scene.FreePlay;
+using RC.Const;
 
 public class HighDiffButton : MonoBehaviour
 {
-    private FreePlayUI Fp;
+    private FreePlay Fp;
     private void Awake()
     {
-        Fp = GameObject.Find("Canvas").GetComponent<FreePlayUI>();
+        Fp = GameObject.Find("Canvas").GetComponent<FreePlay>();
     }
     public void OnClick()
     {
-        Fp.Difficult = myConstants.HighDiff;
+        Fp.NowDifficulty = Difficulty.Complex;
     }
 }

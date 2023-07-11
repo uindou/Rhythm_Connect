@@ -1,14 +1,16 @@
 using UnityEngine;
+using RC.Scene.FreePlay;
+using RC.Const;
 
 public class MidDiffButton : MonoBehaviour
 {
-    private FreePlayUI Fp;
+    private FreePlay Fp;
     private void Awake()
     {
-        Fp = GameObject.Find("Canvas").GetComponent<FreePlayUI>();
+        Fp = GameObject.Find("Canvas").GetComponent<FreePlay>();
     }
     public void OnClick()
     {
-        Fp.Difficult = myConstants.MidDiff;
+        Fp.NowDifficulty = Difficulty.Decent;
     }
 }

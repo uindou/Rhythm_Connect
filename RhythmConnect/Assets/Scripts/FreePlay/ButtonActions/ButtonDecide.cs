@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using RC.Scene.FreePlay;
 
 public class ButtonDecide : MonoBehaviour
 {
@@ -8,9 +9,10 @@ public class ButtonDecide : MonoBehaviour
     {
         GameObject _canvas;
         _canvas = GameObject.Find("Canvas");
-        if(_canvas != null)
+        if (_canvas == null)
         {
-            _canvas.GetComponent<FreePlayUI>().ClickDecide();
+            return;
         }
+        _canvas.GetComponent<FreePlay>().ClickDecide();
     }
 }
