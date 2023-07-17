@@ -13,7 +13,7 @@ namespace RC.DataSource
 {
     class AllSongsFromPath : IAllSongsRepository
     {
-        #region ƒtƒB[ƒ‹ƒhEƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        #region ï¿½tï¿½Bï¿½[ï¿½ï¿½ï¿½hï¿½Eï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
         private string folderListPath;
 
         public AllSongsFromPath(string folderPath)
@@ -22,7 +22,7 @@ namespace RC.DataSource
         }
         #endregion
 
-        #region ƒCƒ“ƒ^[ƒtƒF[ƒXÀ‘•
+        #region ï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½Xï¿½ï¿½ï¿½ï¿½
         public List<FolderModel> GetRCSongData()
         {
             List<string> folderPaths = RcFile.LoadSubFolderToList(folderListPath);
@@ -41,9 +41,9 @@ namespace RC.DataSource
         }
         #endregion
 
-        #region “à•”ƒƒ\ƒbƒh
+        #region ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½bï¿½h
         /// <summary>
-        /// ˆø”‚Éó‚¯æ‚Á‚½ƒtƒHƒ‹ƒ_ƒpƒX‚©‚çƒtƒHƒ‹ƒ_‚ğ“Ç‚İ‚Ş
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½Éó‚¯ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½Hï¿½ï¿½ï¿½_ï¿½pï¿½Xï¿½ï¿½ï¿½ï¿½tï¿½Hï¿½ï¿½ï¿½_ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="folderPath"></param>
         /// <returns></returns>
@@ -65,7 +65,7 @@ namespace RC.DataSource
         }
 
         /// <summary>
-        /// ˆø”‚Éó‚¯æ‚Á‚½ƒtƒHƒ‹ƒ_ƒpƒX‚©‚ç‹È‚ğ“Ç‚İ‚Ş
+        /// ï¿½ï¿½ï¿½ï¿½ï¿½Éó‚¯ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½Hï¿½ï¿½ï¿½_ï¿½pï¿½Xï¿½ï¿½ï¿½ï¿½È‚ï¿½Ç‚İï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="songPath"></param>
         /// <returns></returns>
@@ -79,15 +79,15 @@ namespace RC.DataSource
         }
 
         /// <summary>
-        /// Metaƒtƒ@ƒCƒ‹‚Ì’†g‚ğList‚Æ‚µ‚Äó‚¯æ‚èAƒpƒ‰ƒ[ƒ^‚ğ“Ç‚İ‚ŞB
+        /// Metaï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½Ì’ï¿½ï¿½gï¿½ï¿½Listï¿½Æ‚ï¿½ï¿½Äó‚¯ï¿½ï¿½Aï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½Ç‚İï¿½ï¿½ŞB
         /// </summary>
         /// <param name="lines"></param>
-        /// <returns>¬”Ûi¬Œ÷‚ÅTruej</returns>
+        /// <returns>ï¿½ï¿½ï¿½Ûiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Trueï¿½j</returns>
         private Dictionary<string, object> ReadSongMetaParam(List<string> lines)
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
 
-            //result‚Ì‰Šú‰»
+            //resultï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
             result["genre"] = "";
             result["artist"] = "";
             result["dispbpm"] = "";
@@ -114,17 +114,17 @@ namespace RC.DataSource
                 }
                 else
                 {
-                    //‹ós‚Í–³‹
+                    //ï¿½ï¿½sï¿½Í–ï¿½ï¿½ï¿½
                     continue;
                 }
 
                 if (temp[0][0] != '#')
                 {
-                    //ƒRƒ}ƒ“ƒh‚Å‚È‚¢s‚Í–³‹
+                    //ï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½Å‚È‚ï¿½ï¿½sï¿½Í–ï¿½ï¿½ï¿½
                     continue;
                 }
 
-                //FIXME : Parse‚ğg‚Á‚Ä‚é•”•ª‚ÍŒã‚ÅTryParse‚É‚µ‚È‚¢‚Æ—áŠO“f‚¢‚½‚çÀs~‚Ü‚é
+                //FIXME : Parseï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ä‚é•”ï¿½ï¿½ï¿½ÍŒï¿½ï¿½TryParseï¿½É‚ï¿½ï¿½È‚ï¿½ï¿½Æ—ï¿½Oï¿½fï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½~ï¿½Ü‚ï¿½
                 switch (temp[0])
                 {
                     case "#GENRE":
@@ -169,7 +169,7 @@ namespace RC.DataSource
                         result["notesnum"] = notesnum;
                         break;
 
-                    //‚Ç‚Ìƒpƒ‰ƒ[ƒ^‚É‚àˆê’v‚µ‚È‚¢ê‡‚Í“Ç‚İ”ò‚Î‚·
+                    //ï¿½Ç‚Ìƒpï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½É‚ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Í“Ç‚İ”ï¿½Î‚ï¿½
                     default:
                         break;
                 }
@@ -178,7 +178,7 @@ namespace RC.DataSource
         }
 
         /// <summary>
-        /// Še“ï“x‚Ì•ˆ–Êƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚Ş
+        /// ï¿½eï¿½ï¿½xï¿½Ì•ï¿½ï¿½Êƒtï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="sheetPath"></param>
         /// <returns></returns>
@@ -195,7 +195,7 @@ namespace RC.DataSource
         }
 
         /// <summary>
-        /// •ˆ–Êƒf[ƒ^‚ğ“Ç‚İ‚Ş
+        /// ï¿½ï¿½ï¿½Êƒfï¿½[ï¿½^ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="lines"></param>
         /// <returns></returns>
@@ -247,7 +247,7 @@ namespace RC.DataSource
         }
 
         /// <summary>
-        /// •ˆ–Êƒf[ƒ^‚©‚ç¬ßƒf[ƒ^‚¾‚¯‚ğ“Ç‚İ‚Ş
+        /// ï¿½ï¿½ï¿½Êƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ç¬ï¿½ßƒfï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="lines"></param>
         /// <returns></returns>
